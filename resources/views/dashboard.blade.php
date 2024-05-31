@@ -16,49 +16,13 @@
             /* Para que la navbar quede arriba y el contenido abajo */
         }
 
-        .navbar {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-brand {
-            font-size: 24px;
-        }
-
-        .navbar-nav {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-
-        .nav-item {
-            margin-right: 20px;
-        }
-
-        .nav-link {
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #ccc;
-        }
-
         .content {
             flex-grow: 1;
-            /* El contenido ocupará todo el espacio restante */
             padding: 20px;
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Alinea los elementos en la parte superior */
         }
 
         .container {
@@ -72,11 +36,16 @@
         }
 
         .container-left {
-            flex: 1 1 55%;
+            flex: 50%;
         }
 
         .container-right {
-            flex: 1 1 20%;
+            flex: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Centrar verticalmente */
         }
 
         .balance-container {
@@ -99,16 +68,19 @@
             color: #fff;
             border: none;
             padding: 10px 20px;
-            border-radius: 4px;
+            border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin-right: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
             /* Espacio entre botones */
         }
 
         .btn:hover,
         .btn-close:hover {
             background-color: #0056b3;
+            transform: translateY(-5px);
         }
 
         .input-group {
@@ -163,11 +135,101 @@
             }
         }
 
+        /* Estilos para los titulos */
+
         .titulo {
             text-align: center;
             margin-top: 20px;
             margin-bottom: 20px;
             font-size: 36px;
+        }
+
+        .tituloSaldo {
+            text-align: center;
+            font-size: 30px;
+            color: white;
+        }
+
+        /* Estilos para el contenido del contenedor derecho */
+        .right-content {
+            text-align: center;
+        }
+
+        .right-content img {
+            max-width: 125px;
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .right-content .row {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Centra los elementos verticalmente */
+            margin-bottom: 20px;
+            /* Espacio entre filas */
+        }
+
+        .right-content h3 {
+            font-size: 24px;
+            margin-bottom: 5px; /* Ajusta el espacio entre el título y el botón */
+        }
+
+        .right-content .btn {
+            margin-bottom: 10px; /* Ajusta el espacio entre los botones */
+        }
+
+        /* Estilos para las cards */
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin-bottom: 10px;
+        }
+
+        .card-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            transition: transform 0.3s;
+
+        }
+
+        .card-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -183,7 +245,7 @@
     <div class="content">
         <div class="container container-left">
             <div class="balance-container">
-                <h2>Saldo</h2>
+                <h2 class="tituloSaldo">Saldo</h2>
                 <div class="balance-large">
                     @if(Auth::user())
                     {{ Auth::user()->balance }}
@@ -195,42 +257,81 @@
 
             <!-- Formulario para editar saldo -->
             <div id="editBalanceForm" style="display: none;">
-                <h2>Editar Saldo</h2>
+
                 <form method="POST" action="{{ route('edit.balance') }}">
                     @csrf
                     <div class="input-group">
-                        <label for="new-balance">Nuevo Saldo:</label>
+                        <label for="new-balance">Introduce un nuevo saldo:</label>
                         <input type="number" id="new-balance" name="new-balance" placeholder="Nuevo saldo" required>
                     </div>
                     <button type="submit" class="btn">Guardar</button>
                     <button type="button" class="btn btn-close"
-                        onclick="document.getElementById('editBalanceForm').style.display='none'; document.getElementById('editBalanceBtn').style.display='block';">Cerrar</button>
+                        onclick="document.getElementById('editBalanceForm').style.display='none'; document.getElementById('editBalanceBtn').style.display='inline-block';">Cerrar</button>
                 </form>
             </div>
         </div>
         <div class="container container-right">
             <!-- Contenido del contenedor derecho -->
-            <!-- Aquí podrías colocar la imagen y el texto animado que mencionaste anteriormente -->
+            <div class="right-content">
+                <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
+                <hr>
+                <div class="row">
+                    <h3>Gestiona tus movimientos</h3>
+                    <button class="btn">Gestionar</button>
+                </div>
+                <hr>
+                <div class="row">
+                    <h3>Ver historial de movimientos</h3>
+                    <button class="btn">Ver historial</button>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Cards -->
+    <h1 class="titulo">Tambien pueder ver  otros servicios</h1>
+    <div class="card-container">
+
+        <div class="card">
+            <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
+            <hr>
+            <h3>Servicios</h3>
+            <p>Aquí encontrarás los servicios que ofrecemos detalladamente</p>
+            <button class="card-btn">Ver Más</button>
+        </div>
+        <div class="card">
+            <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
+            <hr>
+            <h3>Utilidades</h3>
+            <p>Descubre nuestras utilidades tales como guardar tu tarjeta
+                o conversor de divisas</p>
+            <button class="card-btn">Ver Más</button>
+        </div>
+        <div class="card">
+            <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
+            <hr>
+            <h3>Contacto</h3>
+            <p>Contacta con nosotros para cualquier duda o problema</p>
+            <button class="card-btn">Ver Más</button>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const toggleMenu = document.getElementById('toggleMenu');
-            const navbarNav = document.querySelector('.navbar-nav');
-
-            toggleMenu.addEventListener('click', function() {
-                navbarNav.classList.toggle('show');
-            });
-
             const editBalanceBtn = document.getElementById('editBalanceBtn');
             editBalanceBtn.addEventListener('click', function() {
-                document.getElementById('editBalanceForm').style.display = 'block';
-                editBalanceBtn.style.display = 'none';
+                const editBalanceForm = document.getElementById('editBalanceForm');
+                if (editBalanceForm.style.display === 'none') {
+                    editBalanceForm.style.display = 'block';
+                    editBalanceBtn.style.display = 'none';
+                } else {
+                    editBalanceForm.style.display = 'none';
+                    editBalanceBtn.style.display = 'inline-block';
+                }
             });
         });
     </script>
+
 </body>
 
 </html>
