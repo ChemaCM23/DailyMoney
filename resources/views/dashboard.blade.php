@@ -144,6 +144,13 @@
             font-size: 36px;
         }
 
+        .tituloIntermedio {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
         .tituloSaldo {
             text-align: center;
             font-size: 30px;
@@ -244,6 +251,7 @@
     </h1>
     <div class="content">
         <div class="container container-left">
+            <h2 class="tituloIntermedio">Edita tu saldo</h2>
             <div class="balance-container">
                 <h2 class="tituloSaldo">Saldo</h2>
                 <div class="balance-large">
@@ -295,7 +303,7 @@
         <div class="card">
             <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
             <hr>
-            <h3>Servicios</h3>
+            <h3>Nosotros</h3>
             <p>Aquí encontrarás los servicios que ofrecemos detalladamente</p>
             <button class="card-btn">Ver Más</button>
         </div>

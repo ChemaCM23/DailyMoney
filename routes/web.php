@@ -15,6 +15,8 @@ use App\Http\Controllers\BalanceController;
 |
 */
 
+/* Mis páginas */
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,6 +24,29 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/movement', function () {
+    return view('movement');
+})->middleware(['auth', 'verified'])->name('movement');
+
+Route::get('/history', function () {
+    return view('history');
+})->middleware(['auth', 'verified'])->name('history');
+
+Route::get('/aboutUs', function () {
+    return view('aboutUs');
+})->middleware(['auth', 'verified'])->name('aboutUs');
+
+Route::get('/utilities', function () {
+    return view('utilities');
+})->middleware(['auth', 'verified'])->name('utilities');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->middleware(['auth', 'verified'])->name('contact');
+
+
+/* Rutas de autenticación */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

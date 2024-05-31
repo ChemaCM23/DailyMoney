@@ -13,6 +13,21 @@
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Inicio') }}
             </x-nav-link>
+            <x-nav-link :href="route('movement')" :active="request()->routeIs('movement')">
+                {{ __('Movimientos') }}
+            </x-nav-link>
+            <x-nav-link :href="route('history')" :active="request()->routeIs('history')">
+                {{ __('Historial') }}
+            </x-nav-link>
+            <x-nav-link :href="route('aboutUs')" :active="request()->routeIs('aboutUs')">
+                {{ __('Nosotros') }}
+            </x-nav-link>
+            <x-nav-link :href="route('utilities')" :active="request()->routeIs('utilities')">
+                {{ __('Utilidades') }}
+            </x-nav-link>
+            <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                {{ __('Contacto') }}
+            </x-nav-link>
 
         </div>
 
