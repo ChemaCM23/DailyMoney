@@ -38,7 +38,7 @@
             span {
                 opacity: 0;
                 transform: scale(0);
-                animation: fadeIn 2.4s forwards;
+                animation: fadeIn 4s forwards;
             }
 
             &::before,
@@ -56,12 +56,12 @@
 
             &::before {
                 left: 50%;
-                animation: slideLeft 1.5s cubic-bezier(0.7, -0.6, 0.3, 1.5) forwards;
+                animation: slideLeft 3s cubic-bezier(0.7, -0.6, 0.3, 1.5) forwards;
             }
 
             &::after {
                 right: 50%;
-                animation: slideRight 1.5s cubic-bezier(0.7, -0.6, 0.3, 1.5) forwards;
+                animation: slideRight 3s cubic-bezier(0.7, -0.6, 0.3, 1.5) forwards;
             }
         }
 
@@ -257,8 +257,8 @@
         <div class="logo"><img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
         </div>
 
-        <div class="descripcion">DailyMoney es una nueva web con una versión para móvil
-            con diversas funciones para controlar tus gastos en tu día a día</div>
+        <div class="descripcion">DailyMoney es una nueva web con una app para móvil
+            con diversas funciones para controlar los gastos en tu día a día</div>
 
         <!-- Cuadro texto y botones -->
         <div class="recuadro">
@@ -312,9 +312,9 @@
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('storage/images/alertas.jpeg') }}" alt="Alertas y recordatorios">
+                <img src="{{ asset('storage/images/contacta.jpeg') }}" alt="Alertas y recordatorios">
                 <div class="card-text">
-                    Alertas y recordatorios
+                    Contacta con nosotros
                 </div>
             </div>
             <div class="card">

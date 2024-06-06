@@ -11,7 +11,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             display: flex;
-            background-color: #f0f0f0;
+            background-color: #d2c3dc;
             flex-direction: column;
             /* Para que la navbar quede arriba y el contenido abajo */
         }
@@ -26,7 +26,7 @@
         }
 
         .container {
-            background-color: #fff;
+            background-color: #ffffffa8;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -197,7 +197,7 @@
         }
 
         .card {
-            background-color: #fff;
+            background-color: #ffffffa8;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 20px;
