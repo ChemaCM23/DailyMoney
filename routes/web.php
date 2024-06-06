@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\MovementController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DebtController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,9 @@ Route::middleware('auth')->group(function () {
     //Contacto2
     Route::get('/contact', [ContactController::class, 'showForm'])->name('contact');
     Route::post('/contact/send', [ContactController::class, 'sendEmail'])->name('contact.send');
+
+    // Para deudas
+    Route::post('/debt/add', [DebtController::class, 'store'])->name('debt.add');
 });
 
 require __DIR__ . '/auth.php';
