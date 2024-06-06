@@ -258,6 +258,7 @@
                     @if(Auth::user())
                     {{ Auth::user()->balance }}
                     @endif
+                    €
                 </div>
             </div>
             <!-- Mostrar botón para editar saldo -->

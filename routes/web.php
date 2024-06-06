@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\MovementController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +60,17 @@ Route::middleware('auth')->group(function () {
 
     // Editar saldo
     Route::post('/edit-balance', [BalanceController::class, 'edit'])->name('edit.balance');
+
+    // Añadir movimiento
+    Route::post('/movements', [MovementController::class, 'store'])->name('movements.store');
+
+    // Crear contacto
+    Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+    //Contacto2
+    Route::get('/contact', [ContactController::class, 'showForm'])->name('contact');
+    Route::post('/contact/send', [ContactController::class, 'sendEmail'])->name('contact.send');
 });
 
 require __DIR__ . '/auth.php';

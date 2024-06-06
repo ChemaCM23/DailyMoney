@@ -16,7 +16,7 @@
 
         .section {
             margin-bottom: 40px;
-            background: #f8f9fa;
+            background: #efeff0;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -24,13 +24,14 @@
 
         .section h2 {
             color: #007bff; /* Color azul para los títulos de sección */
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 10px;
         }
 
         .section p {
             line-height: 1.6;
             margin-bottom: 20px;
+            font-size: 16px;
         }
 
         .contact-btn {
@@ -48,6 +49,14 @@
             background-color: #0056b3; /* Cambio de color al pasar el ratón */
             transform: translateY(-5px); /* Mueve el botón hacia arriba */
         }
+
+        .titulo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+
+        }
     </style>
 </head>
 
@@ -57,6 +66,7 @@
 
     <!-- Contenido -->
     <div class="container">
+        <h1 class="titulo">Descubre todo lo que ofrecemos</h1>
         <div class="section">
             <h2>Registro de Gastos e Ingresos</h2>
             <p>Permite a los usuarios registrar sus transacciones financieras, incluyendo gastos e ingresos, para mantener un seguimiento preciso de sus finanzas personales.</p>
