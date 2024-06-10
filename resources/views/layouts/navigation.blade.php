@@ -129,9 +129,9 @@
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Inicio') }}
             </x-nav-link>
-            <x-nav-link :href="route('movement')" :active="request()->routeIs('movement')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
+            {{--<x-nav-link :href="route('movement')" :active="request()->routeIs('movement')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Movimientos') }}
-            </x-nav-link>
+            </x-nav-link>--}}
             <x-nav-link :href="route('history')" :active="request()->routeIs('history')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Historial') }}
             </x-nav-link>

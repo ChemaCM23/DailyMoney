@@ -6,6 +6,8 @@ use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\MovementController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\MovimientoController;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/edit-balance', [BalanceController::class, 'edit'])->name('edit.balance');
 
     // Añadir movimiento
-    Route::post('/movements', [MovementController::class, 'store'])->name('movements.store');
+    Route::get('/movement', [MovementController::class, 'index'])->name('movement.index');
+    Route::post('/movement', [MovementController::class, 'store'])->name('movement.store');
 
     // Crear contacto
     Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
@@ -75,6 +78,13 @@ Route::middleware('auth')->group(function () {
 
     // Para deudas
     Route::post('/debt/add', [DebtController::class, 'store'])->name('debt.add');
+
+    // Para historial
+    Route::get('/history', [MovementController::class, 'index'])->name('history');
 });
+
+Route::resource('movimientos', MovimientoController::class);
+
+
 
 require __DIR__ . '/auth.php';

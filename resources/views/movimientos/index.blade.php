@@ -40,13 +40,6 @@
             font-size: 16px;
         }
 
-        .movement-form-container .button-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
         .movement-form-container button {
             background-color: #007bff;
             color: #fff;
@@ -61,30 +54,6 @@
         .movement-form-container button:hover {
             background-color: #0056b3;
         }
-
-        .movement-form-container .btn-secondary {
-            background-color: #6c757d;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .movement-form-container .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        .alert {
-            padding: 15px;
-            background-color: #4CAF50;
-            color: white;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
     </style>
 </head>
 
@@ -92,12 +61,7 @@
 
     <div class="movement-form-container">
         <h2>Registrar Movimiento</h2>
-        @if(session('success'))
-            <div class="alert">
-                {{ session('success') }}
-            </div>
-        @endif
-        <form action="{{ route('movement.store') }}" method="POST">
+        <form  method="POST">
             @csrf
             <div class="form-group">
                 <label for="type">Tipo:</label>
@@ -122,10 +86,7 @@
                 <label for="amount">Cantidad:</label>
                 <input type="number" name="amount" id="amount">
             </div>
-            <div class="button-container">
-                <button type="submit">Guardar Movimiento</button>
-                <a href="{{ route('dashboard') }}" class="btn-secondary">Volver al Dashboard</a>
-            </div>
+            <button type="submit">Guardar Movimiento</button>
         </form>
     </div>
 

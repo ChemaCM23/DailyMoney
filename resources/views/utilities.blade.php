@@ -110,6 +110,7 @@
 
 <h1 class="titulo">Herramientas a tu alcance</h1>
 <div class="utilities-container">
+    <!-- Sección izquierda personas con deudas -->
     <div class="left-section">
         <h2 class="titulo2">¿Quién te debe dinero?</h2>
         <ul class="debtors-list" id="debtorsList">
@@ -147,25 +148,10 @@
     </div>
 </div>
 
+
+
 <script>
 
-
-    // Función para marcar el pago de una deuda
-    function markPayment(debtItem) {
-        if (confirm("¿Ha recibido el pago de esta deuda?")) {
-            // Obtener el nombre del deudor y la cantidad adeudada desde el texto del elemento de lista
-            var debtInfo = debtItem.textContent.split(" - $");
-            var debtorName = debtInfo[0];
-            var debtAmount = parseFloat(debtInfo[1]);
-
-            // Registrar el pago (puedes enviar esta información al servidor para actualizar la base de datos)
-            // Aquí puedes implementar la lógica para actualizar el saldo del usuario también
-
-            // Marcar la deuda como pagada (puedes cambiar el estilo del elemento de lista aquí)
-            debtItem.style.textDecoration = "line-through";
-            debtItem.style.color = "gray";
-        }
-    }
 
     //************
     // Conversor de divisas

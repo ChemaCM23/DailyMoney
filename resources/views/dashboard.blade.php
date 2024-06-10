@@ -231,13 +231,18 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             transition: transform 0.3s;
-
+            margin-top: 10px;
         }
 
         .card-btn:hover {
             background-color: #0056b3;
             transform: translateY(-5px);
         }
+
+        .colorLineas {
+            color: black;
+        }
+
     </style>
 </head>
 
@@ -283,10 +288,10 @@
             <!-- Contenido del contenedor derecho -->
             <div class="right-content">
                 <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
-                <hr>
+                <hr class="colorLineas">
                 <div class="row">
-                    <h3>Gestiona tus movimientos</h3>
-                    <button class="btn">Gestionar</button>
+                    <h3>Añade tus movimientos</h3>
+                    <button class="btn">Añadir</button>
                 </div>
                 <hr>
                 <div class="row">
@@ -302,26 +307,25 @@
     <div class="card-container">
 
         <div class="card">
-            <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
+            <img src="{{ asset('storage/images/sobreNosotros.jpeg') }}" alt="Descripción de la imagen">
             <hr>
             <h3>Nosotros</h3>
             <p>Aquí encontrarás los servicios que ofrecemos detalladamente</p>
-            <button class="card-btn">Ver Más</button>
+            <a href="{{ route('aboutUs') }}" class="card-btn">Ver Más</a>
         </div>
         <div class="card">
-            <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
+            <img src="{{ asset('storage/images/utilidades.jpeg') }}" alt="Descripción de la imagen">
             <hr>
             <h3>Utilidades</h3>
-            <p>Descubre nuestras utilidades tales como guardar tu tarjeta
-                o conversor de divisas</p>
-            <button class="card-btn">Ver Más</button>
+            <p>Descubre nuestras herramientas útiles en el día a día</p>
+                <a href="{{ route('utilities') }}" class="card-btn">Ver Más</a>
         </div>
         <div class="card">
-            <img src="{{ asset('storage/images/logoSinFondo.png') }}" alt="Descripción de la imagen">
+            <img src="{{ asset('storage/images/contacto.jpeg') }}" alt="Descripción de la imagen">
             <hr>
             <h3>Contacto</h3>
             <p>Contacta con nosotros para cualquier duda o problema</p>
-            <button class="card-btn">Ver Más</button>
+            <a href="{{ route('contact') }}" class="card-btn">Ver Más</a>
         </div>
     </div>
 
@@ -340,6 +344,8 @@
             });
         });
     </script>
+
+<x-footer />
 
 </body>
 
