@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +9,7 @@ class Movement extends Model
     use HasFactory;
 
     /**
-     * Obtener los usuarios relacionados con esos movimientos
+     * Obtener el usuario relacionado con este movimiento.
      */
     public function user()
     {
@@ -18,10 +17,10 @@ class Movement extends Model
     }
 
     /**
-     * Obtener las categorías asociadas a este movimiento.
+     * Obtener la categoría asociada a este movimiento.
      */
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 }

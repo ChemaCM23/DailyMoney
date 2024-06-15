@@ -6,8 +6,7 @@
     <title>Register</title>
     <style>
         body, html {
-            margin: 0;
-            padding: 0;
+
             height: 100%;
             font-family: Arial, sans-serif;
             display: flex;
@@ -18,9 +17,9 @@
 
         .container {
             display: flex;
-            width: 90%;
+            width: 100%;
             max-width: 1400px;
-            height: 80vh;
+            height: 90vh;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
@@ -43,7 +42,7 @@
 
         .form-side {
             width: 60%;
-            padding: 40px;
+            padding: 80px;
             background-color: white;
             display: flex;
             flex-direction: column;
@@ -54,6 +53,7 @@
             margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
+            gap: 20px; /* Espacio entre los grupos de campos */
         }
 
         .form-group label {
@@ -65,17 +65,23 @@
 
         .form-group input[type="text"],
         .form-group input[type="email"],
-        .form-group input[type="password"] {
+        .form-group input[type="password"],
+        .form-group select {
             flex: 1;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
-            margin-right: 20px;
-            margin-bottom: 10px;
+            width: 100%; /* Ajuste para que los campos ocupen todo el ancho disponible */
         }
 
+        .form-group .third-width {
+            flex: 0 0 calc(33.33% - 10px); /* Ajuste para tres columnas, restando el espacio entre ellos */
+        }
 
+        .form-group .half-width {
+            flex: 0 0 calc(50% - 10px); /* Ajuste para dos columnas, restando el espacio entre ellos */
+        }
 
         .inline-flex {
             display: flex;
@@ -90,6 +96,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
         }
 
         .form-footer a {
@@ -108,7 +117,7 @@
             padding: 12px 24px;
             background-color: #007BFF;
             border: none;
-            border-radius: 5px;
+            border-radius: 20px;
             color: white;
             cursor: pointer;
         }
@@ -128,6 +137,7 @@
 
         .espacio {
             margin-bottom: 20px;
+            font-size: 10px;
         }
     </style>
 </head>
@@ -141,31 +151,44 @@
         <!-- Parte derecha -->
         <div class="form-side">
             <div class="espacio">
-                <h1>Registro</h1>
-                <p>Registrate para poder ingresar a DailyMoney.</p>
+                <h1>Rellena tus datos para crea una cuenta en DailyMoney</h1>
+
             </div>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
-                <!-- Nombre y apellido -->
+                <!-- Nombre, Apellido -->
                 <div class="form-group">
-                    <div>
+                    <div class="half-width">
                         <label for="name">Nombre</label>
                         <input id="name" type="text" name="name" required autofocus autocomplete="name">
                     </div>
-                    <div>
+                    <div class="half-width">
                         <label for="surname">Apellido</label>
                         <input id="surname" type="text" name="surname" required autofocus autocomplete="surname">
                     </div>
                 </div>
 
+                <!-- Moneda -->
+                <div class="form-group">
+                    <div class="third-width">
+                        <label for="currency">Moneda</label>
+                        <select id="currency" name="currency" required>
+                            <option value="EUR">Euro (€)</option>
+                            <option value="USD">Dólar ($)</option>
+                            <option value="GBP">Libra (£)</option>
+                        </select>
+                    </div>
+                </div>
+
+
                 <!-- Telefono y email -->
                 <div class="form-group">
-                    <div>
+                    <div class="half-width">
                         <label for="phone">Teléfono</label>
                         <input id="phone" type="text" name="phone" required autofocus autocomplete="phone">
                     </div>
-                    <div>
+                    <div class="half-width">
                         <label for="email">Email</label>
                         <input id="email" type="email" name="email" required autocomplete="username">
                     </div>
@@ -173,11 +196,11 @@
 
                 <!-- Contraseña y confirmacion -->
                 <div class="form-group">
-                    <div>
+                    <div class="half-width">
                         <label for="password">Contraseña</label>
                         <input id="password" type="password" name="password" required autocomplete="new-password">
                     </div>
-                    <div>
+                    <div class="half-width">
                         <label for="password_confirmation">Confirmar contraseña</label>
                         <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
                     </div>
@@ -185,7 +208,7 @@
 
                 <!-- Link olvidar contraseña y boton registrar -->
                 <div class="form-footer">
-                    {{-- <a href="{{ route('welcome') }}"><button type="button">Volver a la página de bienvenida</button></a> --}}
+                    <a href="{{ route('login') }}" class="btn-secondary">¿Ya tienes una cuenta?</a>
                     <button type="submit">Registrar</button>
                 </div>
             </form>

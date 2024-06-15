@@ -115,6 +115,9 @@
         <h2 class="titulo2">¿Quién te debe dinero?</h2>
         <ul class="debtors-list" id="debtorsList">
             <!-- Aquí se mostrarán los deudores -->
+            {{-- @foreach($deudores as $deudor)
+                <li>{{ $deudor->person_name }}: ${{ $deudor->amount_due }}</li>
+            @endforeach --}}
         </ul>
         <div>
             <form id="debtForm" action="{{ route('debt.add') }}" method="POST">
@@ -165,14 +168,14 @@
         const fromCurrency = document.getElementById('fromCurrency').value;
         const toCurrency = document.getElementById('toCurrency').value;
 
-        // Aquí deberías hacer una llamada a la API para obtener las tasas de cambio y realizar la conversión
+        // Uso de la API para obtener las tasas de cambio y realizar la conversión
         // Ejemplo de cómo hacer la llamada a la API usando fetch:
         const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
         const data = await response.json();
         const exchangeRate = data.rates[toCurrency];
         const convertedAmount = amount * exchangeRate;
 
-        // Mostrar el resultado de la conversión en el campo de entrada conversionResult
+        // Mostrar resultado
         conversionResult.textContent = `${amount} ${fromCurrency} equivale a ${convertedAmount.toFixed(2)} ${toCurrency}`;
     });
 </script>

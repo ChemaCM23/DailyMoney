@@ -34,9 +34,9 @@ Route::get('/movement', function () {
     return view('movement');
 })->middleware(['auth', 'verified'])->name('movement');
 
-Route::get('/history', function () {
+/*Route::get('/history', function () {
     return view('history');
-})->middleware(['auth', 'verified'])->name('history');
+})->middleware(['auth', 'verified'])->name('history');*/
 
 Route::get('/aboutUs', function () {
     return view('aboutUs');
@@ -46,9 +46,9 @@ Route::get('/utilities', function () {
     return view('utilities');
 })->middleware(['auth', 'verified'])->name('utilities');
 
-Route::get('/contact', function () {
+/*Route::get('/contact', function () {
     return view('contact');
-})->middleware(['auth', 'verified'])->name('contact');
+})->middleware(['auth', 'verified'])->name('contact'); */
 
 
 /* Rutas de autenticación */
@@ -68,9 +68,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/movement', [MovementController::class, 'index'])->name('movement.index');
     Route::post('/movement', [MovementController::class, 'store'])->name('movement.store');
 
+    // Editar y borrar un movimiento
+    // Ruta para mostrar el formulario de edición
+    Route::get('/movements/{id}/edit', [MovementController::class, 'edit'])->name('movement.edit');
+
+    // Ruta para actualizar el movimiento
+    Route::put('/movements/{id}', [MovementController::class, 'update'])->name('movement.update');
+
+    // Ruta para borrar el movimiento
+    Route::delete('/movements/{id}', [MovementController::class, 'destroy'])->name('movement.destroy');
+
     // Crear contacto
-    Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    //Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+    //Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
     //Contacto2
     Route::get('/contact', [ContactController::class, 'showForm'])->name('contact');
@@ -78,12 +88,13 @@ Route::middleware('auth')->group(function () {
 
     // Para deudas
     Route::post('/debt/add', [DebtController::class, 'store'])->name('debt.add');
+    //Route::get('/deudas', [DebtController::class, 'index'])->name('deudas');
 
     // Para historial
-    Route::get('/history', [MovementController::class, 'index'])->name('history');
+    // Route::get('/history', [MovementController::class, 'index'])->name('history');
 });
 
-Route::resource('movimientos', MovimientoController::class);
+//Route::resource('movimientos', MovimientoController::class);
 
 
 

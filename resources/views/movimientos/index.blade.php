@@ -40,6 +40,13 @@
             font-size: 16px;
         }
 
+        .movement-form-container .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
         .movement-form-container button {
             background-color: #007bff;
             color: #fff;
@@ -54,14 +61,65 @@
         .movement-form-container button:hover {
             background-color: #0056b3;
         }
+
+        .movement-form-container .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .movement-form-container .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .alert {
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .history-container {
+            margin-top: 40px;
+        }
+
+        .history-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .history-container th, .history-container td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .history-container th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 
 <body>
 
+    <x-app-layout></x-app-layout>
+
     <div class="movement-form-container">
         <h2>Registrar Movimiento</h2>
-        <form  method="POST">
+        @if(session('success'))
+            <div class="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        <form action="{{ route('movement.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="type">Tipo:</label>
@@ -86,9 +144,40 @@
                 <label for="amount">Cantidad:</label>
                 <input type="number" name="amount" id="amount">
             </div>
-            <button type="submit">Guardar Movimiento</button>
+            <div class="button-container">
+                <button type="submit">Guardar Movimiento</button>
+                <a href="{{ route('dashboard') }}" class="btn-secondary">Volver al Dashboard</a>
+            </div>
         </form>
     </div>
+
+    <div class="history-container">
+        <h2>Historial de Movimientos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Categoría</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($history as $movement)
+                <tr>
+                    <td>{{ ucfirst($movement->type) }}</td>
+                    <td>{{ optional($movement->category)->name ?: '-' }}</td>
+                    <td>{{ $movement->description ?: '-' }}</td>
+                    <td>{{ $movement->amount }}</td>
+                    <td>{{ $movement->created_at->format('d-m-Y H:i') }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <x-footer></x-footer>
 
 </body>
 

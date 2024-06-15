@@ -5,7 +5,7 @@
             <ul style="list-style: none;">
                 <li><a href="{{ route('aboutUs') }}" style="color: #000000; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">About Us</a></li>
                 <li><a href="{{ route('utilities') }}" style="color: #000000; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Utilities</a></li>
-                <li><a href="{{ route('history') }}" style="color: #000000; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">History</a></li>
+                <li><a href="{{ route('movement.index') }}" style="color: #000000; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">History</a></li>
             </ul>
         </div>
         <!-- Segunda columna -->

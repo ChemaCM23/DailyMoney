@@ -22,4 +22,14 @@ class DebtController extends Controller
 
         return redirect()->back()->with('success', 'Deuda agregada correctamente.');
     }
+
+
+    /*public function index()
+    {
+        // Obtén todos los registros de deudas para el usuario autenticado
+        $deudores = Debt::where('user_id', auth()->id())->get();
+        return view('deudas.index', compact('deudores'));
+    } */
+
+
 }

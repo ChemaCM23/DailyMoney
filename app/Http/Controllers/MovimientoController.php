@@ -5,79 +5,58 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movement;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
-class MovimientoController extends Controller
+class MovementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        // Obtener todos los movimientos del usuario autenticado
+        $movements = Auth::user()->movements()->latest()->get();
+
+        // Obtener todas las categorías
         $categories = Category::all();
-        return view('movimientos.index', compact('categories'));
+
+        // Obtener historial de movimientos (todos los movimientos del usuario)
+        $history = Auth::user()->movements()->latest()->get();
+
+        // Pasar los movimientos, historial y categorías a la vista movement.blade.php utilizando compact
+        return view('movement', compact('movements', 'history', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'type' => 'required|in:expense,income',
-            'category_id' => 'required|exists:categories,id',
-            'description' => 'nullable|string',
-            'amount' => 'required|numeric'
-        ]);
+        try {
+            $request->validate([
+                'type' => 'required|in:expense,income',
+                'category_id' => 'required|exists:categories,id',
+                'description' => 'nullable|string',
+                'amount' => 'required|numeric'
+            ]);
 
-        $movement = new Movement();
-        $movement->user_id = $request->user_id;
-        $movement->type = $request->type;
-        $movement->category_id = $request->category_id;
-        $movement->description = $request->description;
-        $movement->amount = $request->amount;
-        $movement->save();
+            $user_id = Auth::id(); // Obtener el ID del usuario autenticado
 
-        return back()->with('success', 'Movimiento guardado correctamente.');
-    }
+            // Guardar el movimiento
+            $movement = new Movement();
+            $movement->user_id = $user_id;
+            $movement->type = $request->type;
+            $movement->category_id = $request->category_id;
+            $movement->description = $request->description;
+            $movement->amount = $request->amount;
+            $movement->save();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+            // Actualizar el saldo del usuario (esto lo asumo, ajusta según tu lógica)
+            $user = Auth::user();
+            if ($request->type === 'income') {
+                $user->balance += $request->amount;
+            } elseif ($request->type === 'expense') {
+                $user->balance -= $request->amount;
+            }
+            $user->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            return back()->with('success', 'Movimiento guardado correctamente.');
+        } catch (\Exception $e) {
+            dd($e->getMessage()); // Imprime cualquier excepción que ocurra
+        }
     }
 }

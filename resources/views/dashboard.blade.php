@@ -261,9 +261,18 @@
                 <h2 class="tituloSaldo">Saldo</h2>
                 <div class="balance-large">
                     @if(Auth::user())
-                    {{ Auth::user()->balance }}
+                    @switch(Auth::user()->currency)
+                        @case('EUR')
+                            € {{ Auth::user()->balance }}
+                            @break
+                        @case('USD')
+                            $ {{ Auth::user()->balance }}
+                            @break
+                        @case('GBP')
+                            £ {{ Auth::user()->balance }}
+                            @break
+                    @endswitch
                     @endif
-                    €
                 </div>
             </div>
             <!-- Mostrar botón para editar saldo -->

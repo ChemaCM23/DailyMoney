@@ -119,8 +119,8 @@
         <!-- Logo -->
         <div class=" logo flex justify-start lg:w-0 lg:flex-1">
             <a href="{{ route('dashboard') }}">
-                <img src="/img/logo-mobile.png" alt="Logo" class="block lg:hidden h-8 w-auto">
-                <img src="/img/logo.png" alt="Logo" class="hidden lg:block h-8 w-auto">
+                <img style="height: 75px" src="{{ asset('storage/images/logoSinFondo.png') }}"  alt="Logo móvil" class="block lg:hidden ">
+                <img style="height: 75px" src="{{ asset('storage/images/logoSinFondo.png') }}"  alt="Logo" class="hidden lg:block ">
             </a>
         </div>
 
@@ -129,12 +129,12 @@
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Inicio') }}
             </x-nav-link>
-            {{--<x-nav-link :href="route('movement')" :active="request()->routeIs('movement')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
-                {{ __('Movimientos') }}
-            </x-nav-link>--}}
-            <x-nav-link :href="route('history')" :active="request()->routeIs('history')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
+            <x-nav-link :href="route('movement.index')" :active="request()->routeIs('movement')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Historial') }}
             </x-nav-link>
+            {{--<x-nav-link :href="route('history')" :active="request()->routeIs('history')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
+                {{ __('Historial') }}
+            </x-nav-link> --}}
             <x-nav-link :href="route('aboutUs')" :active="request()->routeIs('aboutUs')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Nosotros') }}
             </x-nav-link>

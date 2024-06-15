@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('balance');
+            $table->string('currency')->default('EUR');
             $table->string('surname');
             $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();

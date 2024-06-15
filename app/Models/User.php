@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'surname',
         'phone', // Agregar el campo 'phone' al arreglo $fillable
+        'currency',
     ];
 
     /**

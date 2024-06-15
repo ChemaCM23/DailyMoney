@@ -36,6 +36,7 @@ class RegisteredUserController extends Controller
             'phone' => ['required', 'string', 'max:255'], // Agrega la validación para 'phone'
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'currency' => ['required', 'string', 'in:EUR,USD,GBP'], // Validacion para esas 3 opciones
         ]);
 
         $user = User::create([
@@ -45,6 +46,8 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone, // Agrega el campo 'phone'
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'currency' => $request->currency,
+
         ]);
 
         event(new Registered($user));

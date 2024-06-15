@@ -80,8 +80,15 @@
 
         .form-footer {
             display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-footer .links {
+            display: flex;
             justify-content: space-between;
-            align-items: center;
+            width: 100%;
+            margin-bottom: 20px; /* Incrementa el espacio entre los enlaces y el botón */
         }
 
         .form-footer a {
@@ -103,6 +110,7 @@
             border-radius: 5px;
             color: white;
             cursor: pointer;
+            align-self: flex-end; /* Alinea el botón a la derecha */
         }
 
         .form-footer button:hover {
@@ -163,7 +171,10 @@
 
                 <!-- Olvidar contraseña y boton registrar -->
                 <div class="form-footer">
-                    <a href="{{ route('password.request') }}">¿Olvidaste la contraseña?</a>
+                    <div class="links">
+                        <a href="{{ route('password.request') }}">¿Olvidaste la contraseña?</a>
+                        <a href="{{ route('register') }}" class="btn-secondary">¿No tienes una cuenta?</a>
+                    </div>
                     <button type="submit">Iniciar sesión</button>
                 </div>
             </form>

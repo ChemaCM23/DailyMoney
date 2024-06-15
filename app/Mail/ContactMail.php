@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -21,6 +20,6 @@ class ContactMail extends Mailable
     {
         return $this->from($this->data['email'])
                     ->subject('Nuevo mensaje de contacto')
-                    ->view('contact');
+                    ->view('emails.contact', ['data' => $this->data]);
     }
 }

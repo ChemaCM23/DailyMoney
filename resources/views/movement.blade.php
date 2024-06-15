@@ -7,12 +7,18 @@
     <title>Movimientos - DailyMoney</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Estilos específicos para el formulario de movimientos */
+
+        body {
+            background-color: #d2c3dc;
+        }
+
         .movement-form-container {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             max-width: 800px;
-            margin: 0 auto;
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 10px;
@@ -53,7 +59,7 @@
             border: none;
             padding: 10px 20px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -68,7 +74,7 @@
             text-decoration: none;
             padding: 10px 20px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 20px;
             transition: background-color 0.3s ease;
             display: inline-flex;
             align-items: center;
@@ -83,32 +89,100 @@
             background-color: #4CAF50;
             color: white;
             margin-bottom: 20px;
-            border-radius: 5px;
+            border-radius: 20px;
+        }
+
+        .history-container {
+            margin-top: 40px;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .history-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .history-container th,
+        .history-container td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .history-container th {
+            background-color: #f2f2f2;
+        }
+
+        .history-container .btn-warning,
+        .history-container .btn-danger {
+            display: inline-block;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            margin-right: 5px;
+        }
+
+        .history-container .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .history-container .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .history-container .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .history-container .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
 
+    <x-app-layout></x-app-layout>
+
     <div class="movement-form-container">
-        <h2>Registrar Movimiento</h2>
+        <h1 class="titulo">Registrar Movimiento</h1>
         @if(session('success'))
-            <div class="alert">
-                {{ session('success') }}
-            </div>
+        <div class="alert">
+            {{ session('success') }}
+        </div>
         @endif
         <form action="{{ route('movement.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="type">Tipo:</label>
-                <select name="type" id="type">
+                <select name="type" id="type" required>
                     <option value="expense">Gasto</option>
                     <option value="income">Ingreso</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="category_id">Categoría:</label>
-                <select name="category_id" id="category_id">
+                <select name="category_id" id="category_id" required>
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -116,18 +190,53 @@
             </div>
             <div class="form-group">
                 <label for="description">Descripción:</label>
-                <input type="text" name="description" id="description">
+                <input type="text" name="description" id="description" required>
             </div>
             <div class="form-group">
                 <label for="amount">Cantidad:</label>
-                <input type="number" name="amount" id="amount">
+                <input type="number" name="amount" id="amount" step="0.01" min="0" required>
             </div>
             <div class="button-container">
                 <button type="submit">Guardar Movimiento</button>
-                <a href="{{ route('dashboard') }}" class="btn-secondary">Volver al Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="btn-secondary">Volver al inicio</a>
             </div>
         </form>
     </div>
+
+    <div class="history-container">
+        <h1 class="titulo">Historial de Movimientos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($history as $movement)
+                <tr>
+                    <td>{{ optional($movement->category)->name ?: '-' }}</td>
+                    <td>{{ $movement->description ?: '-' }}</td>
+                    <td>{{ $movement->amount }}</td>
+                    <td>{{ $movement->created_at->format('d-m-Y H:i') }}</td>
+                    <td>
+                        <a href="{{ route('movement.edit', $movement->id) }}" class="btn-warning">Editar</a>
+                        <form action="{{ route('movement.destroy', $movement->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-danger">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <x-footer></x-footer>
 
 </body>
 
