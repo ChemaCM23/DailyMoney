@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #d2c3dc;
             margin: 0;
             padding: 0;
         }
@@ -19,9 +19,10 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1 {
+        .title {
             text-align: center;
             color: #333;
+            font-size: 24px;
         }
         label {
             display: block;
@@ -86,7 +87,7 @@
     <x-app-layout></x-app-layout>
 
     <div class="contact-form-container"> <!-- Contenedor del formulario de contacto -->
-        <h1>Formulario de Contacto</h1>
+        <h1 class="title">Formulario de Contacto</h1>
         @if ($errors->any())
             <div class="error-message">
                 <ul>
@@ -116,10 +117,12 @@
                 <textarea id="message" name="message" required>{{ old('message') }}</textarea>
             </div>
             <div class="btn-container">
-                <a href="{{ route('dashboard') }}" class="btnIzq">Volver al Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="btnIzq">Volver al inicio</a>
                 <button class="btnDer" type="submit">Enviar Mensaje</button>
             </div>
         </form>
     </div>
+
+    <x-footer></x-footer>
 </body>
 </html>

@@ -8,7 +8,7 @@
         /* Estilos previamente definidos */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #d2c3dc;
             margin: 0;
             padding: 0;
         }
@@ -113,12 +113,6 @@
     <!-- Sección izquierda personas con deudas -->
     <div class="left-section">
         <h2 class="titulo2">¿Quién te debe dinero?</h2>
-        <ul class="debtors-list" id="debtorsList">
-            <!-- Aquí se mostrarán los deudores -->
-            {{-- @foreach($deudores as $deudor)
-                <li>{{ $deudor->person_name }}: ${{ $deudor->amount_due }}</li>
-            @endforeach --}}
-        </ul>
         <div>
             <form id="debtForm" action="{{ route('debt.add') }}" method="POST">
                 @csrf
@@ -127,6 +121,13 @@
                 <button type="submit">Añadir Deuda</button>
             </form>
         </div>
+
+        <!-- Lista de los deudores -->
+        <ul class="debtors-list" id="debtorsList">
+            {{-- @foreach($deudores as $deudor)
+                <li>{{ $deudor->person_name }}: ${{ $deudor->amount_due }}</li>
+            @endforeach --}}
+        </ul>
     </div>
 
     <!-- Sección derecha conversor de monedas -->
@@ -150,6 +151,8 @@
         </div>
     </div>
 </div>
+
+<x-footer></x-footer>
 
 
 

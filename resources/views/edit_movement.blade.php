@@ -40,18 +40,46 @@
             font-size: 16px;
         }
 
+        .edit-movement-container .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .edit-movement-container button {
             background-color: #007bff;
             color: #fff;
             border: none;
             padding: 10px 20px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .edit-movement-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .buttonVolver {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .buttonVolver:hover {
             background-color: #0056b3;
         }
     </style>
@@ -62,17 +90,17 @@
     <x-app-layout></x-app-layout>
 
     <div class="edit-movement-container">
-        <h2>Editar Movimiento</h2>
+        <h1 class="title">Editar Movimiento</h1>
         <form action="{{ route('movement.update', $movement->id) }}" method="POST">
             @csrf
             @method('PUT')
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="type">Tipo:</label>
                 <select name="type" id="type">
                     <option value="expense" {{ $movement->type === 'expense' ? 'selected' : '' }}>Gasto</option>
                     <option value="income" {{ $movement->type === 'income' ? 'selected' : '' }}>Ingreso</option>
                 </select>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="category_id">Categoría:</label>
                 <select name="category_id" id="category_id">
@@ -89,7 +117,10 @@
                 <label for="amount">Cantidad:</label>
                 <input type="number" name="amount" id="amount" value="{{ $movement->amount }}">
             </div>
-            <button type="submit">Guardar Cambios</button>
+            <div class="btn-container">
+                <button type="submit">Guardar Cambios</button>
+                <a href="{{ route('movement.index') }}" class="buttonVolver">Volver</a>
+            </div>
         </form>
     </div>
 

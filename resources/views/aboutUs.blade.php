@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Estilos para el contenido */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d2c3dc;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -95,7 +100,9 @@
         <div class="section">
             <h2>Contacta con Nosotros</h2>
             <p>Para consultas, sugerencias o asistencia, no dudes en ponerte en contacto con nuestro equipo. Estamos aquí para ayudarte.</p>
-            <button class="contact-btn">Contactar</button>
+            <a href="{{ route('aboutUs') }}">
+                <button class="contact-btn">Contacta</button>
+            </a>
         </div>
 
         <div class="section">
@@ -108,6 +115,8 @@
             <p>Permite a los usuarios exportar sus datos financieros en formatos compatibles para su análisis adicional o para facilitar la migración a otros servicios.</p>
         </div>
     </div>
+
+    <x-footer></x-footer>
 </body>
 
 </html>

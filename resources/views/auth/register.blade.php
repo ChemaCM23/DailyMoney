@@ -12,7 +12,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f0f0f0;
+            background: #d2c3dc;
         }
 
         .container {
@@ -103,7 +103,7 @@
 
         .form-footer a {
             text-decoration: none;
-            color: #007BFF;
+            color: #2a004f;
             font-weight: bold;
             transition: transform 0.3s;
         }
@@ -115,7 +115,7 @@
 
         .form-footer button {
             padding: 12px 24px;
-            background-color: #007BFF;
+            background-color: #490188;
             border: none;
             border-radius: 20px;
             color: white;
@@ -123,7 +123,7 @@
         }
 
         .form-footer button:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
         }
 
         @keyframes float {

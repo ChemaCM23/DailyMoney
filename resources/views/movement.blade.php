@@ -7,7 +7,6 @@
     <title>Movimientos - DailyMoney</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-
         body {
             background-color: #d2c3dc;
         }
@@ -157,6 +156,58 @@
             font-size: 24px;
             font-weight: bold;
         }
+
+        /* Estilos para las ventanas modales */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 15px;
+        }
+
+        .modal-content button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+
+        .modal-content button:hover {
+            background-color: #0056b3;
+        }
+
+        .modal-content .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .modal-content .btn-danger:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 
@@ -171,7 +222,7 @@
             {{ session('success') }}
         </div>
         @endif
-        <form action="{{ route('movement.store') }}" method="POST">
+        <form id="movementForm" action="{{ route('movement.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="type">Tipo:</label>
@@ -197,10 +248,30 @@
                 <input type="number" name="amount" id="amount" step="0.01" min="0" required>
             </div>
             <div class="button-container">
-                <button type="submit">Guardar Movimiento</button>
-                <a href="{{ route('dashboard') }}" class="btn-secondary">Volver al inicio</a>
+                <button type="button" onclick="openSaveModal()">Guardar Movimiento</button>
+                <a href="{{ route('dashboard') }}" class="btn-secondary">Ver saldo</a>
             </div>
         </form>
+    </div>
+
+    <!-- Ventana Modal para Confirmar Guardar Movimiento -->
+    <div id="confirmSaveModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Guardar Movimiento</h2>
+            <p>¿Estás seguro de que quieres guardar este movimiento?</p>
+            <button onclick="saveMovement()">Guardar</button>
+            <button onclick="closeSaveModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Ventana Modal para Confirmar Borrar Movimiento -->
+    <div id="confirmDeleteModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Borrar Movimiento</h2>
+            <p>¿Estás seguro de que quieres borrar este movimiento?</p>
+            <button class="btn-danger" id="confirmDeleteButton">Borrar</button>
+            <button onclick="closeDeleteModal()">Cancelar</button>
+        </div>
     </div>
 
     <div class="history-container">
@@ -224,10 +295,10 @@
                     <td>{{ $movement->created_at->format('d-m-Y H:i') }}</td>
                     <td>
                         <a href="{{ route('movement.edit', $movement->id) }}" class="btn-warning">Editar</a>
-                        <form action="{{ route('movement.destroy', $movement->id) }}" method="POST" style="display:inline;">
+                        <button class="btn-danger" onclick="openDeleteModal({{ $movement->id }})">Borrar</button>
+                        <form id="deleteForm-{{ $movement->id }}" action="{{ route('movement.destroy', $movement->id) }}" method="POST" style="display:none;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn-danger">Borrar</button>
                         </form>
                     </td>
                 </tr>
@@ -237,6 +308,34 @@
     </div>
 
     <x-footer></x-footer>
+
+    <script>
+        //Modal guardar movimiento
+        function openSaveModal() {
+            document.getElementById('confirmSaveModal').style.display = 'block';
+        }
+
+        function closeSaveModal() {
+            document.getElementById('confirmSaveModal').style.display = 'none';
+        }
+
+        function saveMovement() {
+            document.getElementById('movementForm').submit();
+        }
+
+
+        //Modal borrar movimiento
+        function openDeleteModal(id) {
+            document.getElementById('confirmDeleteModal').style.display = 'block';
+            document.getElementById('confirmDeleteButton').onclick = function () {
+                document.getElementById('deleteForm-' + id).submit();
+            };
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('confirmDeleteModal').style.display = 'none';
+        }
+    </script>
 
 </body>
 

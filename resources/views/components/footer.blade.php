@@ -1,11 +1,11 @@
-<footer style="background-color: #ed89ff; color: #fff; padding: 20px 0;">
+<footer style="background-color: #9d2ffe; color: #fff; padding: 20px 0;">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
         <!-- Primera columna -->
         <div style="margin-left: 100px">
             <ul style="list-style: none;">
-                <li><a href="{{ route('aboutUs') }}" style="color: #000000; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">About Us</a></li>
-                <li><a href="{{ route('utilities') }}" style="color: #000000; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Utilities</a></li>
-                <li><a href="{{ route('movement.index') }}" style="color: #000000; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">History</a></li>
+                <li><a href="{{ route('aboutUs') }}" style="color: #ffffff; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Sobre nosotros</a></li>
+                <li><a href="{{ route('utilities') }}" style="color: #ffffff; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Utilities</a></li>
+                <li><a href="{{ route('movement.index') }}" style="color: #ffffff; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Historial de movimientos</a></li>
             </ul>
         </div>
         <!-- Segunda columna -->
@@ -16,9 +16,9 @@
         <!-- Tercera columna -->
         <div style="margin-right: 100px; text-align: center;">
             <div>
-                <h4 style="font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #000000;">Contacta con nosotros</h4>
+                <h4 style="font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #ffffff;">Contacta con nosotros</h4>
                 <a href="{{ route('contact') }}" style="text-decoration: none;">
-                    <button style="background-color: #5a0069; color: #fff; border: none; padding: 10px 20px; font-size: 16px; border-radius: 20px; cursor: pointer; transition: background-color 0.3s ease; &:hover {transform: translateY(-5px);}"
+                    <button style="background-color: #2a004f; color: #fff; border: none; padding: 10px 20px; font-size: 16px; border-radius: 20px; cursor: pointer; transition: background-color 0.3s ease; &:hover {transform: translateY(-5px);}"
                     class="contact-button">Contacto</button>
                 </a>
             </div>

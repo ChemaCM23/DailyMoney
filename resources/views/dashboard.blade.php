@@ -49,7 +49,7 @@
         }
 
         .balance-container {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border-radius: 8px;
             padding: 20px;
@@ -64,7 +64,7 @@
 
         .btn,
         .btn-close {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -79,7 +79,7 @@
 
         .btn:hover,
         .btn-close:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
             transform: translateY(-5px);
         }
 
@@ -223,7 +223,7 @@
         }
 
         .card-btn {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             border-radius: 20px;
@@ -235,7 +235,7 @@
         }
 
         .card-btn:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
             transform: translateY(-5px);
         }
 
@@ -300,12 +300,12 @@
                 <hr class="colorLineas">
                 <div class="row">
                     <h3>Añade tus movimientos</h3>
-                    <button class="btn">Añadir</button>
+                    <a href="{{ route('movement.index') }}" class="btn">Añadir</a>
                 </div>
                 <hr>
                 <div class="row">
                     <h3>Ver historial de movimientos</h3>
-                    <button class="btn">Ver historial</button>
+                    <a href="{{ route('movement.index') }}" class="btn">Ver historial</a>
                 </div>
             </div>
         </div>

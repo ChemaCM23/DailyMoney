@@ -68,7 +68,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/movement', [MovementController::class, 'index'])->name('movement.index');
     Route::post('/movement', [MovementController::class, 'store'])->name('movement.store');
 
-    // Editar y borrar un movimiento
     // Ruta para mostrar el formulario de edición
     Route::get('/movements/{id}/edit', [MovementController::class, 'edit'])->name('movement.edit');
 

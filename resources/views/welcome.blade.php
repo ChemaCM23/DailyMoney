@@ -96,7 +96,7 @@
         .button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #490188;
             color: white;
             text-decoration: none;
             border-radius: 30px;
@@ -113,7 +113,7 @@
         }
 
         .button:hover {
-            background-color: #14005e;
+            background-color: #2a004f;
             transform: translateY(-5px);
         }
 
@@ -279,25 +279,33 @@
         <div class="card-container">
             <!-- Primera fila -->
             <div class="card">
-                <img src="{{ asset('storage/images/registroGastosIngresos.jpeg') }}" alt="Registro de gastos e ingresos">
+                <a href="{{ route('aboutUs') }}">
+                    <img src="{{ asset('storage/images/registroGastosIngresos.jpeg') }}" alt="Registro de gastos e ingresos">
+                </a>
                 <div class="card-text">
                     Registro de gastos e ingresos
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('storage/images/categoriasGastosIngresos.jpeg') }}" alt="Categoriías gastos e ingresos">
+                <a href="{{ route('aboutUs') }}">
+                    <img src="{{ asset('storage/images/categoriasGastosIngresos.jpeg') }}" alt="Categoriías gastos e ingresos">
+                </a>
                 <div class="card-text">
                     Categorización de gastos e ingresos
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('storage/images/visuSaldo.jpeg') }}" alt="Visualización de saldo">
+                <a href="{{ route('aboutUs') }}">
+                    <img src="{{ asset('storage/images/visuSaldo.jpeg') }}" alt="Visualización de saldo">
+                </a>
                 <div class="card-text">
                     Visualización de saldo
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('storage/images/historialTransacciones.jpeg') }}" alt="Historial de transacciones">
+                <a href="{{ route('aboutUs') }}">
+                    <img src="{{ asset('storage/images/historialTransacciones.jpeg') }}" alt="Historial de transacciones">
+                </a>
                 <div class="card-text">
                     Historial de transacciones
                 </div>
@@ -306,46 +314,43 @@
         <!-- Segunda fila -->
         <div class="card-container">
             <div class="card">
-                <img src="{{ asset('storage/images/analisisGastos.jpeg') }}" alt="Analisis de gastos">
+                <a href="{{ route('aboutUs') }}">
+                    <img src="{{ asset('storage/images/analisisGastos.jpeg') }}" alt="Analisis de gastos">
+                </a>
                 <div class="card-text">
                     Análisis de gastos
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('storage/images/contacta.jpeg') }}" alt="Alertas y recordatorios">
+                <a href="{{ route('aboutUs') }}">
+                    <img src="{{ asset('storage/images/contacta.jpeg') }}" alt="Alertas y recordatorios">
+                </a>
                 <div class="card-text">
                     Contacta con nosotros
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('storage/images/seguridad.jpeg') }}" alt="Seguridad  y privacidad">
+                <a href="{{ route('aboutUs') }}">
+                    <img src="{{ asset('storage/images/seguridad.jpeg') }}" alt="Seguridad  y privacidad">
+                </a>
                 <div class="card-text">
                     Seguridad y privacidad
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('storage/images/exportarDatos.jpeg') }}" alt="Exportación de datos">
+                <a href="{{ route('aboutUs') }}">
+                    <img src="{{ asset('storage/images/exportarDatos.jpeg') }}" alt="Exportación de datos">
+                </a>
                 <div class="card-text">
                     Exportación de datos
                 </div>
             </div>
         </div>
 
-        <!-- Botón de alternancia de modo -->
-        <button id="mode-toggle">Cambiar Modo</button>
 
     </div>
 
-    <!-- **********
-        Javascript
-        ***********
-    -->
     <script>
-
-        /* Cambiar modo */
-        document.getElementById('mode-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-        });
 
         /* Texto principal */
         let duration = 0.8;
