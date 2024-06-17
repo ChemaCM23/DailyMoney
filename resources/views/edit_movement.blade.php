@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Estilos específicos para el formulario de edición */
+
+        body {
+            font-family: Arial;
+            background-color: #d2c3dc;
+        }
+
         .edit-movement-container {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            font-family: Arial;
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
@@ -47,7 +52,7 @@
         }
 
         .edit-movement-container button {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -58,7 +63,7 @@
         }
 
         .edit-movement-container button:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
         }
 
         .title {
@@ -67,7 +72,7 @@
             font-size: 24px;
         }
         .buttonVolver {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -80,7 +85,7 @@
         }
 
         .buttonVolver:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
         }
     </style>
 </head>
@@ -94,13 +99,13 @@
         <form action="{{ route('movement.update', $movement->id) }}" method="POST">
             @csrf
             @method('PUT')
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <label for="type">Tipo:</label>
                 <select name="type" id="type">
                     <option value="expense" {{ $movement->type === 'expense' ? 'selected' : '' }}>Gasto</option>
                     <option value="income" {{ $movement->type === 'income' ? 'selected' : '' }}>Ingreso</option>
                 </select>
-            </div> -->
+            </div>
             <div class="form-group">
                 <label for="category_id">Categoría:</label>
                 <select name="category_id" id="category_id">

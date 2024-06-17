@@ -20,6 +20,6 @@ class ContactMail extends Mailable
     {
         return $this->from($this->data['email'])
                     ->subject('Nuevo mensaje de contacto')
-                    ->view('emails.contact', ['data' => $this->data]);
+                    ->view('emails.contacto', ['data' => $this->data]);
     }
 }

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Movement;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+
 
 class MovementController extends Controller
 {
@@ -101,4 +105,24 @@ class MovementController extends Controller
             dd($e->getMessage()); // Imprime cualquier excepción que ocurra
         }
     }
+
+    public function generatePdf($movementId)
+{
+    $movement = Movement::findOrFail($movementId)->with('category')->get();
+
+    $html = view('pdf', compact('movement'))->render();
+
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+
+    $dompdf = new Dompdf($options);
+
+    $dompdf->loadHtml($html);
+
+    $dompdf->setPaper('A4', 'portrait');
+
+    $dompdf->render();
+
+    return $dompdf->stream("pdf");
+}
 }

@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utilidades</title>
     <style>
-        /* Estilos previamente definidos */
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial;
             background-color: #d2c3dc;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .utilities-container {
             display: flex;
             justify-content: space-between;
             padding: 20px;
+            flex: 1;
         }
         .left-section, .right-section {
             width: calc(50% - 10px);
@@ -44,14 +47,13 @@
             margin-top: 10px;
             text-align: center;
         }
-        .titulo3{
+        .titulo3 {
             font-size: 14px;
             font-weight: bold;
             margin-bottom: 10px;
             margin-top: 10px;
             text-align: center;
         }
-        /* Nuevos estilos para el conversor de divisas */
         .currency-converter {
             margin-top: 20px;
             text-align: center;
@@ -70,7 +72,7 @@
             width: 22%;
         }
         .currency-converter button {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -80,29 +82,76 @@
             transition: background-color 0.3s ease;
         }
         .currency-converter button:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
         }
         .conversion-result {
             font-size: 16px;
             margin-top: 10px;
             text-align: center;
         }
-        /* Nuevos estilos para la lista de deudores */
-        .debtors-list {
+        .debtors-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
-            padding-left: 0;
         }
-        .debtors-list li {
-            list-style: none;
-            margin-bottom: 10px;
-            font-size: 16px;
+        .debtors-table th, .debtors-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .debtors-table th {
+            background-color: #f2f2f2;
+        }
+        .btn-paid {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .debtors-list li:hover {
-            text-decoration: line-through;
-            color: gray;
+        .btn-paid:hover {
+            background-color: #218838;
+        }
+        x-footer {
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        /* Estilos adicionales para los campos del formulario */
+        .debt-form-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .debt-form-container input {
+            width: 80%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+        .debt-form-container button {
+            background-color: #490188;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .debt-form-container button:hover {
+            background-color: #2a004f;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -113,7 +162,7 @@
     <!-- Sección izquierda personas con deudas -->
     <div class="left-section">
         <h2 class="titulo2">¿Quién te debe dinero?</h2>
-        <div>
+        <div class="debt-form-container">
             <form id="debtForm" action="{{ route('debt.add') }}" method="POST">
                 @csrf
                 <input type="text" id="newDebtorName" name="newDebtorName" placeholder="Nombre del deudor" required>
@@ -122,12 +171,31 @@
             </form>
         </div>
 
-        <!-- Lista de los deudores -->
-        <ul class="debtors-list" id="debtorsList">
-            {{-- @foreach($deudores as $deudor)
-                <li>{{ $deudor->person_name }}: ${{ $deudor->amount_due }}</li>
-            @endforeach --}}
-        </ul>
+        <!-- Tabla de los deudores -->
+        <table class="debtors-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad adeudada</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($deudores as $deudor)
+                <tr>
+                    <td>{{ $deudor->person_name }}</td>
+                    <td>${{ $deudor->amount_due }}</td>
+                    <td>
+                        <form class="markAsPaidForm" action="{{ route('debt.markAsPaid', $deudor->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PATCH')
+                            <button type="button" class="btn-paid">Pagado</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
     <!-- Sección derecha conversor de monedas -->
@@ -152,17 +220,8 @@
     </div>
 </div>
 
-<x-footer></x-footer>
-
-
-
 <script>
-
-
-    //************
     // Conversor de divisas
-    //************
-
     const convertButton = document.getElementById('convertButton');
     const conversionResult = document.getElementById('conversionResult');
 
@@ -172,7 +231,6 @@
         const toCurrency = document.getElementById('toCurrency').value;
 
         // Uso de la API para obtener las tasas de cambio y realizar la conversión
-        // Ejemplo de cómo hacer la llamada a la API usando fetch:
         const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
         const data = await response.json();
         const exchangeRate = data.rates[toCurrency];
@@ -181,7 +239,37 @@
         // Mostrar resultado
         conversionResult.textContent = `${amount} ${fromCurrency} equivale a ${convertedAmount.toFixed(2)} ${toCurrency}`;
     });
+
+    // Manejar el botón "Pagado"
+    document.querySelectorAll('.btn-paid').forEach(button => {
+        button.addEventListener('click', function() {
+            const form = this.closest('form');
+            const actionUrl = form.action;
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción marcará la deuda como pagada.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, marcar como pagada'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();  // Enviar el formulario
+                    Swal.fire(
+                        '¡Marcada!',
+                        'La deuda ha sido marcada como pagada.',
+                        'success'
+                    ).then(() => {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
 </script>
 
+<x-footer></x-footer>
 </body>
 </html>

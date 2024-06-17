@@ -28,7 +28,7 @@
         }
 
         .section h2 {
-            color: #007bff; /* Color azul para los títulos de sección */
+            color: #490188; /* Color azul para los títulos de sección */
             font-size: 26px;
             margin-bottom: 10px;
         }
@@ -40,7 +40,7 @@
         }
 
         .contact-btn {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -51,8 +51,8 @@
         }
 
         .contact-btn:hover {
-            background-color: #0056b3; /* Cambio de color al pasar el ratón */
-            transform: translateY(-5px); /* Mueve el botón hacia arriba */
+            background-color: #2a004f;
+            transform: translateY(-5px);
         }
 
         .titulo {

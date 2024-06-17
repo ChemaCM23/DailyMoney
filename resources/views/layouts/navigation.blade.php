@@ -138,7 +138,7 @@
             <x-nav-link :href="route('aboutUs')" :active="request()->routeIs('aboutUs')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Nosotros') }}
             </x-nav-link>
-            <x-nav-link :href="route('utilities')" :active="request()->routeIs('utilities')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
+            <x-nav-link :href="route('utilities.index')" :active="request()->routeIs('utilities')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Utilidades') }}
             </x-nav-link>
             <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
@@ -202,7 +202,7 @@
                 <x-responsive-nav-link :href="route('aboutUs')" :active="request()->routeIs('aboutUs')">
                     {{ __('Nosotros') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('utilities')" :active="request()->routeIs('utilities')">
+                <x-responsive-nav-link :href="route('utilities.index')" :active="request()->routeIs('utilities')">
                     {{ __('Utilidades') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">

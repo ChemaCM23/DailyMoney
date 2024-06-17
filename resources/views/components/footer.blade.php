@@ -4,7 +4,7 @@
         <div style="margin-left: 100px">
             <ul style="list-style: none;">
                 <li><a href="{{ route('aboutUs') }}" style="color: #ffffff; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Sobre nosotros</a></li>
-                <li><a href="{{ route('utilities') }}" style="color: #ffffff; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Utilities</a></li>
+                <li><a href="{{ route('utilities.index') }}" style="color: #ffffff; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Utilities</a></li>
                 <li><a href="{{ route('movement.index') }}" style="color: #ffffff; font-weight: bold; text-decoration: none; font-size: 16px; margin-bottom: 10px;">Historial de movimientos</a></li>
             </ul>
         </div>

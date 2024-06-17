@@ -64,7 +64,7 @@
 
         .btnIzq,
         .btnDer {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             margin-top: 30px;
@@ -77,7 +77,7 @@
 
         .btnIzq:hover,
         .btnDer:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
             transform: translateY(-5px);
         }
     </style>

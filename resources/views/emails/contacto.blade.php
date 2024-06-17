@@ -8,14 +8,12 @@
 </head>
 
 <body>
-    <p>¡Hola!</p>
     <p>Has recibido un nuevo mensaje de contacto:</p>
     <ul>
         <li><strong>Nombre:</strong> {{ $data['name'] }}</li>
         <li><strong>Correo electrónico:</strong> {{ $data['email'] }}</li>
         <li><strong>Mensaje:</strong> {{ $data['message'] }}</li>
     </ul>
-    <p>¡Gracias!</p>
 </body>
 
 </html>

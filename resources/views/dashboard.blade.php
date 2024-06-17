@@ -148,7 +148,7 @@
             text-align: center;
             margin-top: 10px;
             margin-bottom: 10px;
-            font-size: 30px;
+            font-size: 24px;
         }
 
         .tituloSaldo {
@@ -327,7 +327,7 @@
             <hr>
             <h3>Utilidades</h3>
             <p>Descubre nuestras herramientas útiles en el día a día</p>
-                <a href="{{ route('utilities') }}" class="card-btn">Ver Más</a>
+                <a href="{{ route('utilities.index') }}" class="card-btn">Ver Más</a>
         </div>
         <div class="card">
             <img src="{{ asset('storage/images/contacto.jpeg') }}" alt="Descripción de la imagen">

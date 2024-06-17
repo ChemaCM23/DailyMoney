@@ -13,7 +13,6 @@
 
         .movement-form-container {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
             max-width: 800px;
             margin-top: 50px;
             margin-left: auto;
@@ -53,7 +52,7 @@
         }
 
         .movement-form-container button {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -64,11 +63,11 @@
         }
 
         .movement-form-container button:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
         }
 
         .movement-form-container .btn-secondary {
-            background-color: #6c757d;
+            background-color: #490188;
             color: #fff;
             text-decoration: none;
             padding: 10px 20px;
@@ -80,7 +79,7 @@
         }
 
         .movement-form-container .btn-secondary:hover {
-            background-color: #5a6268;
+            background-color: #2a004f;
         }
 
         .alert {
@@ -133,12 +132,12 @@
         }
 
         .history-container .btn-warning {
-            background-color: #ffc107;
-            color: #212529;
+            background-color: #490188;
+            color: #ffffff;
         }
 
         .history-container .btn-warning:hover {
-            background-color: #e0a800;
+            background-color: #2a004f;
         }
 
         .history-container .btn-danger {
@@ -186,7 +185,7 @@
         }
 
         .modal-content button {
-            background-color: #007bff;
+            background-color: #490188;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -198,7 +197,7 @@
         }
 
         .modal-content button:hover {
-            background-color: #0056b3;
+            background-color: #2a004f;
         }
 
         .modal-content .btn-danger {
@@ -207,6 +206,30 @@
 
         .modal-content .btn-danger:hover {
             background-color: #c82333;
+        }
+
+        /* Boton pdf */
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        .btn-pdf {
+            background-color: #490188;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-pdf:hover {
+            background-color: #2a004f;
         }
     </style>
 </head>
@@ -305,6 +328,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="button-container">
+            <a href="{{ route('generate-pdf', $movement->id) }}" class="btn-pdf">Generar PDF</a>
+        </div>
     </div>
 
     <x-footer></x-footer>
@@ -320,9 +346,10 @@
         }
 
         function saveMovement() {
-            document.getElementById('movementForm').submit();
+            if (validateForm()) {
+                document.getElementById('movementForm').submit();
+            }
         }
-
 
         //Modal borrar movimiento
         function openDeleteModal(id) {
@@ -334,6 +361,33 @@
 
         function closeDeleteModal() {
             document.getElementById('confirmDeleteModal').style.display = 'none';
+        }
+
+        // Validar formulario
+        function validateForm() {
+            const type = document.getElementById('type').value;
+            const category_id = document.getElementById('category_id').value;
+            const description = document.getElementById('description').value.trim();
+            const amount = document.getElementById('amount').value;
+
+            if (!type) {
+                alert('El campo "Tipo" es obligatorio.');
+                return false;
+            }
+            if (!category_id) {
+                alert('El campo "Categoría" es obligatorio.');
+                return false;
+            }
+            if (!description) {
+                alert('El campo "Descripción" es obligatorio.');
+                return false;
+            }
+            if (!amount || parseFloat(amount) <= 0) {
+                alert('El campo "Cantidad" es obligatorio y debe ser mayor a 0.');
+                return false;
+            }
+
+            return true;
         }
     </script>
 

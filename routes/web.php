@@ -24,7 +24,7 @@ use App\Http\Controllers\HistoryController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -77,24 +77,23 @@ Route::middleware('auth')->group(function () {
     // Ruta para borrar el movimiento
     Route::delete('/movements/{id}', [MovementController::class, 'destroy'])->name('movement.destroy');
 
-    // Crear contacto
-    //Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-    //Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
     //Contacto2
     Route::get('/contact', [ContactController::class, 'showForm'])->name('contact');
     Route::post('/contact/send', [ContactController::class, 'sendEmail'])->name('contact.send');
 
     // Para deudas
     Route::post('/debt/add', [DebtController::class, 'store'])->name('debt.add');
-    //Route::get('/deudas', [DebtController::class, 'index'])->name('deudas');
+    Route::get('/utilities', [DebtController::class, 'index'])->name('utilities.index');
+    Route::patch('/debt/{id}/markAsPaid', [DebtController::class, 'markAsPaid'])->name('debt.markAsPaid');
 
-    // Para historial
-    // Route::get('/history', [MovementController::class, 'index'])->name('history');
 });
 
-//Route::resource('movimientos', MovimientoController::class);
+Route::get('/unauthorized', function () {
+    return view('errors.unauthorized');
+})->name('unauthorized');
 
+//PDF
+Route::get('movement/{movementId}/pdf', [MovementController::class, 'generatePdf'])->name('generate-pdf');
 
 
 require __DIR__ . '/auth.php';
