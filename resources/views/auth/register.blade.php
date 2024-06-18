@@ -6,7 +6,6 @@
     <title>Register</title>
     <style>
         body, html {
-
             height: 100%;
             font-family: Arial, sans-serif;
             display: flex;
@@ -139,6 +138,11 @@
             margin-bottom: 20px;
             font-size: 10px;
         }
+
+        .error-message {
+            color: red;
+            font-size: 0.875em;
+        }
     </style>
 </head>
 <body>
@@ -151,8 +155,7 @@
         <!-- Parte derecha -->
         <div class="form-side">
             <div class="espacio">
-                <h1>Rellena tus datos para crea una cuenta en DailyMoney</h1>
-
+                <h1>Rellena tus datos para crear una cuenta en DailyMoney</h1>
             </div>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
@@ -161,11 +164,17 @@
                 <div class="form-group">
                     <div class="half-width">
                         <label for="name">Nombre</label>
-                        <input id="name" type="text" name="name" required autofocus autocomplete="name">
+                        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
+                        @error('name')
+                            <span class="error-message">{{ 'El nombre debe contener 50 digitos' }}</span>
+                        @enderror
                     </div>
                     <div class="half-width">
                         <label for="surname">Apellido</label>
-                        <input id="surname" type="text" name="surname" required autofocus autocomplete="surname">
+                        <input id="surname" type="text" name="surname" value="{{ old('surname') }}" required autofocus autocomplete="surname">
+                        @error('surname')
+                            <span class="error-message">{{ 'El apellido debe contener 50 digitos' }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -174,31 +183,42 @@
                     <div class="third-width">
                         <label for="currency">Moneda</label>
                         <select id="currency" name="currency" required>
-                            <option value="EUR">Euro (€)</option>
-                            <option value="USD">Dólar ($)</option>
-                            <option value="GBP">Libra (£)</option>
+                            <option value="EUR" {{ old('currency') == 'EUR' ? 'selected' : '' }}>Euro (€)</option>
+                            <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>Dólar ($)</option>
+                            <option value="GBP" {{ old('currency') == 'GBP' ? 'selected' : '' }}>Libra (£)</option>
                         </select>
+                        @error('currency')
+                            <span class="error-message">{{ 'Debes elegir una moneda del desplegable' }}</span>
+                        @enderror
                     </div>
                 </div>
 
-
-                <!-- Telefono y email -->
+                <!-- Teléfono y email -->
                 <div class="form-group">
                     <div class="half-width">
                         <label for="phone">Teléfono</label>
-                        <input id="phone" type="text" name="phone" required autofocus autocomplete="phone">
+                        <input id="phone" type="text" name="phone" value="{{ old('phone') }}" required autofocus autocomplete="phone">
+                        @error('phone')
+                            <span class="error-message">{{ 'El teléfono debe contener 9 digitos' }}</span>
+                        @enderror
                     </div>
                     <div class="half-width">
                         <label for="email">Email</label>
-                        <input id="email" type="email" name="email" required autocomplete="username">
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username">
+                        @error('email')
+                            <span class="error-message">{{ 'El email debe tener un formato de email' }}</span>
+                        @enderror
                     </div>
                 </div>
 
-                <!-- Contraseña y confirmacion -->
+                <!-- Contraseña y confirmación -->
                 <div class="form-group">
                     <div class="half-width">
                         <label for="password">Contraseña</label>
                         <input id="password" type="password" name="password" required autocomplete="new-password">
+                        @error('password')
+                            <span class="error-message">{{ 'La contraseña debe contener mínimo 8 caracteres' }}</span>
+                        @enderror
                     </div>
                     <div class="half-width">
                         <label for="password_confirmation">Confirmar contraseña</label>
@@ -206,24 +226,13 @@
                     </div>
                 </div>
 
-                <!-- Link olvidar contraseña y boton registrar -->
+                <!-- Link olvidar contraseña y botón registrar -->
                 <div class="form-footer">
                     <a href="{{ route('login') }}" class="btn-secondary">¿Ya tienes una cuenta?</a>
-                    <button type="submit" onclick="enviarForm()">Registrar</button>
+                    <button type="submit">Registrar</button>
                 </div>
             </form>
         </div>
     </div>
-    <script>
-        function enviarForm() {
-            var form = document.getElementById('registrationForm');
-            if (form.checkValidity()) {
-                alert('Se te ha enviado un email de verificación, para poder navegar por la web revisa tu bandeja de entrada y verifica tu email.');
-                form.submit();
-            } else {
-                alert('Algún dato del formulario no es válido.')
-            }
-        }
-    </script>
 </body>
 </html>

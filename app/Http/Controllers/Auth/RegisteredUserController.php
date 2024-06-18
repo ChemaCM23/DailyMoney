@@ -31,9 +31,9 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'], // Agrega la validación para 'surname'
-            'phone' => ['required', 'string', 'max:255'], // Agrega la validación para 'phone'
+            'name' => ['required', 'string', 'max:50'],
+            'surname' => ['required', 'string', 'max:50'], // Agrega la validación para 'surname'
+            'phone' => ['required', 'string', 'max:255','regex:/^\d{9,9}$/'], // Agrega la validación para 'phone'
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'currency' => ['required', 'string', 'in:EUR,USD,GBP'], // Validacion para esas 3 opciones
