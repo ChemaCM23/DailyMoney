@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <h1>Movimientos</h1>
+    <h1>Historial de tus transacciones</h1>
     <table>
         <thead>
             <tr>
@@ -33,7 +33,7 @@
             <tr>
                 <td>{{ $movements->category->name }}</td>
                 <td>{{ $movements->description }}</td>
-                <td>{{ $movements->type }}</td>
+                <td>{{ $movements->type === 'income' ? 'Ingreso' : 'Gasto' }}</td>
                 <td>{{ $movements->amount }}</td>
                 <td>{{ $movements->created_at }}</td>
             </tr>
@@ -42,6 +42,6 @@
     </table>
 
     <br><br>
-    <h4>PDF descargado de la página DailyMoney</h4>
+    <h4>PDF generado por DailyMoney</h4>
 </body>
 </html>

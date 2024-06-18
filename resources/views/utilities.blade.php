@@ -89,6 +89,14 @@
             margin-top: 10px;
             text-align: center;
         }
+        .debtors-table-container {
+            width: 30%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+        }
         .debtors-table {
             width: 100%;
             border-collapse: collapse;
@@ -123,19 +131,27 @@
             width: 100%;
             bottom: 0;
         }
-        /* Estilos adicionales para los campos del formulario */
+
         .debt-form-container {
             text-align: center;
             margin-top: 20px;
         }
+        .debt-form-container label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+            margin-left: 10%;
+        }
         .debt-form-container input {
             width: 80%;
-            margin-bottom: 10px;
+            margin-bottom: 20px; /* Espacio entre campos */
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            display: inline-block;
+            display: block;
+            margin: 0 auto;
         }
         .debt-form-container button {
             background-color: #490188;
@@ -146,9 +162,15 @@
             border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto 0; /* Espacio antes del botón */
         }
         .debt-form-container button:hover {
             background-color: #2a004f;
+        }
+
+        .spacelabel{
+            margin-top: 20px;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -165,37 +187,17 @@
         <div class="debt-form-container">
             <form id="debtForm" action="{{ route('debt.add') }}" method="POST">
                 @csrf
-                <input type="text" id="newDebtorName" name="newDebtorName" placeholder="Nombre del deudor" required>
-                <input type="number" id="debtAmount" name="debtAmount" placeholder="Cantidad adeudada" required>
+                <div class="input-group">
+                    <label for="newDebtorName">Nombre del deudor</label>
+                    <input type="text" id="newDebtorName" name="newDebtorName" placeholder="Nombre" required>
+                </div>
+                <div class="input-group">
+                    <label class="spacelabel" for="debtAmount">Cantidad adeudada</label>
+                    <input type="number" id="debtAmount" name="debtAmount" placeholder="Cantidad" step="0.01" required>
+                </div>
                 <button type="submit">Añadir Deuda</button>
             </form>
         </div>
-
-        <!-- Tabla de los deudores -->
-        <table class="debtors-table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cantidad adeudada</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($deudores as $deudor)
-                <tr>
-                    <td>{{ $deudor->person_name }}</td>
-                    <td>${{ $deudor->amount_due }}</td>
-                    <td>
-                        <form class="markAsPaidForm" action="{{ route('debt.markAsPaid', $deudor->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('PATCH')
-                            <button type="button" class="btn-paid">Pagado</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
 
     <!-- Sección derecha conversor de monedas -->
@@ -220,6 +222,34 @@
     </div>
 </div>
 
+<!-- Tabla de los deudores -->
+<div class="debtors-table-container">
+    <table class="debtors-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad adeudada</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($deudores as $deudor)
+            <tr>
+                <td>{{ $deudor->person_name }}</td>
+                <td>${{ $deudor->amount_due }}</td>
+                <td>
+                    <form class="markAsPaidForm" action="{{ route('debt.markAsPaid', $deudor->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('PATCH')
+                        <button type="button" class="btn-paid"> Marcar como pagado</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
 <script>
     // Conversor de divisas
     const convertButton = document.getElementById('convertButton');
@@ -230,13 +260,13 @@
         const fromCurrency = document.getElementById('fromCurrency').value;
         const toCurrency = document.getElementById('toCurrency').value;
 
+
         // Uso de la API para obtener las tasas de cambio y realizar la conversión
         const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
         const data = await response.json();
         const exchangeRate = data.rates[toCurrency];
         const convertedAmount = amount * exchangeRate;
 
-        // Mostrar resultado
         conversionResult.textContent = `${amount} ${fromCurrency} equivale a ${convertedAmount.toFixed(2)} ${toCurrency}`;
     });
 

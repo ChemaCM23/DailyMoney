@@ -36,6 +36,16 @@
         </div>
 
         <div>
+            <x-input-label for="currency" :value="__('Moneda')" />
+            <select id="currency" name="currency" class="mt-1 block w-full" required autofocus>
+                <option value="EUR" {{ old('currency', $user->currency) == 'EUR' ? 'selected' : '' }}>Euro (€)</option>
+                <option value="USD" {{ old('currency', $user->currency) == 'USD' ? 'selected' : '' }}>Dólar ($)</option>
+                <option value="GBP" {{ old('currency', $user->currency) == 'GBP' ? 'selected' : '' }}>Libra (£)</option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('currency')" />
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />

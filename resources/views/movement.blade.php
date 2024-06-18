@@ -312,7 +312,7 @@
             <tbody>
                 @foreach ($history as $movement)
                 <tr>
-                    <td>{{ optional($movement->category)->name ?: '-' }}</td>
+                    <td>{{ $movement->category->name ?: '-' }}</td>
                     <td>{{ $movement->description ?: '-' }}</td>
                     <td>{{ $movement->amount }}</td>
                     <td>{{ $movement->created_at->format('d-m-Y H:i') }}</td>
@@ -329,7 +329,7 @@
             </tbody>
         </table>
         <div class="button-container">
-            <a href="{{ route('generate-pdf', $movement->id) }}" class="btn-pdf">Generar PDF</a>
+            <a href="{{ route('generate-pdf', $movement->id) }}" class="btn-pdf">Generar PDF de tu historial</a>
         </div>
     </div>
 
