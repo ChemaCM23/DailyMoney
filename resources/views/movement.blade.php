@@ -329,7 +329,9 @@
             </tbody>
         </table>
         <div class="button-container">
+            @if ($movements->count() > 0)
             <a href="{{ route('generate-pdf', $movement->id) }}" class="btn-pdf">Generar PDF de tu historial</a>
+            @endif
         </div>
     </div>
 

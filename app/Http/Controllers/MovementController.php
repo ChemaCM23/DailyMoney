@@ -89,6 +89,19 @@ class MovementController extends Controller
             $movement->amount = $request->amount;
             $movement->save();
 
+            $type = $request->input('type');
+            $amount = $request->input('amount');
+
+            $user = Auth::user();
+
+            if ($type === 'expense') {
+                $user->balance -= $amount;
+            } elseif ($type === 'income') {
+                $user->balance += $amount;
+            }
+
+            $user->save();
+
             return redirect()->route('movement.index')->with('success', 'Movimiento actualizado correctamente.');
         } catch (\Exception $e) {
             dd($e->getMessage()); // Imprime cualquier excepción que ocurra
@@ -107,22 +120,23 @@ class MovementController extends Controller
     }
 
     public function generatePdf($movementId)
-{
-    $movement = Movement::findOrFail($movementId)->with('category')->get();
+    {
 
-    $html = view('pdf', compact('movement'))->render();
+        $movement = Movement::findOrFail($movementId)->with('category')->get();
 
-    $options = new Options();
-    $options->set('isHtml5ParserEnabled', true);
+        $html = view('pdf', compact('movement'))->render();
 
-    $dompdf = new Dompdf($options);
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
 
-    $dompdf->loadHtml($html);
+        $dompdf = new Dompdf($options);
 
-    $dompdf->setPaper('A4', 'portrait');
+        $dompdf->loadHtml($html);
 
-    $dompdf->render();
+        $dompdf->setPaper('A4', 'portrait');
 
-    return $dompdf->stream("pdf");
-}
+        $dompdf->render();
+
+        return $dompdf->stream("pdf");
+    }
 }

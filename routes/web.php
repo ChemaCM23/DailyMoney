@@ -6,8 +6,8 @@ use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\MovementController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DebtController;
-use App\Http\Controllers\MovimientoController;
-use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +86,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/utilities', [DebtController::class, 'index'])->name('utilities.index');
     Route::patch('/debt/{id}/markAsPaid', [DebtController::class, 'markAsPaid'])->name('debt.markAsPaid');
 
+
 });
+
+// Vista admin
+Route::put('/admin/{id}/make-admin', [AdminController::class, 'makeAdmin'])->name('make-admin');
+Route::resource('admin', AdminController::class)->middleware(['auth', 'admin']);
 
 Route::get('/unauthorized', function () {
     return view('errors.unauthorized');

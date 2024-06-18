@@ -144,6 +144,12 @@
             <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
                 {{ __('Contacto') }}
             </x-nav-link>
+            @if (Auth::user()->is_admin == 1)
+            <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')" class="text-white text-xl transition-transform transform-gpu hover:-translate-y-1 ">
+                {{ __('Panel Admin') }}
+            </x-nav-link>
+            @endif
+
         </div>
 
 

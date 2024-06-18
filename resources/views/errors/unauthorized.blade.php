@@ -30,7 +30,7 @@
         </div>
     </section>
     <div id="button-container">
-        <a href="{{ route('inicio') }}" class="btn btn-danger">Volver a la página de inicio</a>
+        <a href="{{ route('welcome') }}" class="btn btn-danger">Volver a la página de inicio</a>
     </div>
 </div>
 

@@ -209,10 +209,21 @@
                 <!-- Link olvidar contraseña y boton registrar -->
                 <div class="form-footer">
                     <a href="{{ route('login') }}" class="btn-secondary">¿Ya tienes una cuenta?</a>
-                    <button type="submit">Registrar</button>
+                    <button type="submit" onclick="enviarForm()">Registrar</button>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        function enviarForm() {
+            var form = document.getElementById('registrationForm');
+            if (form.checkValidity()) {
+                alert('Se te ha enviado un email de verificación, para poder navegar por la web revisa tu bandeja de entrada y verifica tu email.');
+                form.submit();
+            } else {
+                alert('Algún dato del formulario no es válido.')
+            }
+        }
+    </script>
 </body>
 </html>
