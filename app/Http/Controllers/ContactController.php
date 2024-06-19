@@ -28,7 +28,7 @@ class ContactController extends Controller
             'message' => $request->message,
         ];
 
-        // Cambia el valor de 'to' al correo electrónico al que quieres que lleguen los mensajes
+
         Mail::to('jomacamu23@gmail.com')->send(new ContactMail($data));
 
         return redirect()->back()->with('success', '¡El mensaje ha sido enviado correctamente!');

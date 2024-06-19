@@ -32,18 +32,18 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:50'],
-            'surname' => ['required', 'string', 'max:50'], // Agrega la validación para 'surname'
-            'phone' => ['required', 'string', 'max:255','regex:/^\d{9,9}$/'], // Agrega la validación para 'phone'
+            'surname' => ['required', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:255','regex:/^\d{9,9}$/'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'currency' => ['required', 'string', 'in:EUR,USD,GBP'], // Validacion para esas 3 opciones
+            'currency' => ['required', 'string', 'in:EUR,USD,GBP'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
-            'balance' => 0, // Agrega el campo 'balance'
-            'surname' => $request->surname, // Agrega el campo 'surname'
-            'phone' => $request->phone, // Agrega el campo 'phone'
+            'balance' => 0,
+            'surname' => $request->surname,
+            'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'currency' => $request->currency,

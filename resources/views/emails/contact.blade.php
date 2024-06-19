@@ -86,7 +86,7 @@
 
     <x-app-layout></x-app-layout>
 
-    <div class="contact-form-container"> <!-- Contenedor del formulario de contacto -->
+    <div class="contact-form-container">
         <h1 class="title">Formulario de Contacto</h1>
         @if ($errors->any())
             <div class="error-message">

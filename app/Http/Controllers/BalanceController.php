@@ -17,9 +17,9 @@ class BalanceController extends Controller
 
         $user = new User();
 
-        $user = Auth::user(); // Asegúrate de que el usuario está autenticado
-        $user->balance += $request->input('initial-balance'); // Añadir al saldo existente
-        $user->save(); // Guardar el cambio en la base de datos
+        $user = Auth::user();
+        $user->balance += $request->input('initial-balance');
+        $user->save();
 
         return back()->with('success', 'Saldo añadido correctamente.');
     }

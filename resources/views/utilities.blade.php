@@ -145,7 +145,7 @@
         }
         .debt-form-container input {
             width: 80%;
-            margin-bottom: 20px; /* Espacio entre campos */
+            margin-bottom: 20px;
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
@@ -163,7 +163,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             display: block;
-            margin: 20px auto 0; /* Espacio antes del botón */
+            margin: 20px auto 0;
         }
         .debt-form-container button:hover {
             background-color: #2a004f;
@@ -236,7 +236,7 @@
             @foreach($deudores as $deudor)
             <tr>
                 <td>{{ $deudor->person_name }}</td>
-                <td>${{ $deudor->amount_due }}</td>
+                <td>{{ $deudor->amount_due }}</td>
                 <td>
                     <form class="markAsPaidForm" action="{{ route('debt.markAsPaid', $deudor->id) }}" method="POST" style="display:inline;">
                         @csrf
@@ -286,7 +286,7 @@
                 confirmButtonText: 'Sí, marcar como pagada'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    form.submit();  // Enviar el formulario
+                    form.submit();
                     Swal.fire(
                         '¡Marcada!',
                         'La deuda ha sido marcada como pagada.',

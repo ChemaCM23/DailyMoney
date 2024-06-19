@@ -13,7 +13,6 @@
             display: flex;
             background-color: #d2c3dc;
             flex-direction: column;
-            /* Para que la navbar quede arriba y el contenido abajo */
         }
 
         .content {
@@ -22,7 +21,7 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Alinea los elementos en la parte superior */
+            align-items: flex-start;
         }
 
         .container {
@@ -32,7 +31,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
             margin: 0 10px;
-            /* Mantiene un margen entre contenedores */
+
         }
 
         .container-left {
@@ -45,7 +44,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Centrar verticalmente */
+
         }
 
         .balance-container {
@@ -74,7 +73,7 @@
             margin-right: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
-            /* Espacio entre botones */
+
         }
 
         .btn:hover,
@@ -174,18 +173,18 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Centra los elementos verticalmente */
+
             margin-bottom: 20px;
-            /* Espacio entre filas */
+
         }
 
         .right-content h3 {
             font-size: 24px;
-            margin-bottom: 5px; /* Ajusta el espacio entre el título y el botón */
+            margin-bottom: 5px;
         }
 
         .right-content .btn {
-            margin-bottom: 10px; /* Ajusta el espacio entre los botones */
+            margin-bottom: 10px;
         }
 
         /* Estilos para las cards */
@@ -275,7 +274,7 @@
                     @endif
                 </div>
             </div>
-            <!-- Mostrar botón para editar saldo -->
+
             <button type="button" class="btn" id="editBalanceBtn">Editar Saldo</button>
 
             <!-- Formulario para editar saldo -->

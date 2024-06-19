@@ -88,7 +88,7 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
-            margin-bottom: 20px; /* Incrementa el espacio entre los enlaces y el botón */
+            margin-bottom: 20px;
         }
 
         .form-footer a {
@@ -111,7 +111,7 @@
             border-radius: 20px;
             color: white;
             cursor: pointer;
-            align-self: flex-end; /* Alinea el botón a la derecha */
+            align-self: flex-end;
         }
 
         .form-footer button:hover {
@@ -154,14 +154,12 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email" type="email" name="email" required autofocus autocomplete="username">
-                    <!-- Aquí puedes mostrar los errores del email -->
                 </div>
 
                 <!-- Contraseña -->
                 <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input id="password" type="password" name="password" required autocomplete="current-password">
-                    <!-- Aquí puedes mostrar los errores del password -->
                 </div>
 
                 <!-- Recuerdame -->

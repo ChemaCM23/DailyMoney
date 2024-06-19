@@ -7,7 +7,7 @@
     <title>Sobre Nosotros - DailyMoney</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Estilos para el contenido */
+
         body {
             font-family: Arial, sans-serif;
             background-color: #d2c3dc;
@@ -28,7 +28,7 @@
         }
 
         .section h2 {
-            color: #490188; /* Color azul para los títulos de sección */
+            color: #490188;
             font-size: 26px;
             margin-bottom: 10px;
         }
@@ -45,7 +45,7 @@
             border: none;
             padding: 10px 20px;
             font-size: 16px;
-            border-radius: 20px; /* Más redondeado */
+            border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
@@ -100,7 +100,7 @@
         <div class="section">
             <h2>Contacta con Nosotros</h2>
             <p>Para consultas, sugerencias o asistencia, no dudes en ponerte en contacto con nuestro equipo. Estamos aquí para ayudarte.</p>
-            <a href="{{ route('aboutUs') }}">
+            <a href="{{ route('contact') }}">
                 <button class="contact-btn">Contacta</button>
             </a>
         </div>

@@ -15,7 +15,7 @@ class DebtController extends Controller
         ]);
 
         Debt::create([
-            'user_id' => auth()->id(), // Aquí asumo que estás utilizando autenticación de usuarios
+            'user_id' => auth()->id(),
             'person_name' => $request->input('newDebtorName'),
             'amount_due' => $request->input('debtAmount'),
         ]);
@@ -26,7 +26,7 @@ class DebtController extends Controller
 
     public function index()
     {
-        // Obtén todos los registros de deudas para el usuario autenticado
+        // registros usuario autenticado
         $deudores = Debt::where('user_id', auth()->id())->get();
         return view('utilities', compact('deudores'));
     }
@@ -34,7 +34,7 @@ class DebtController extends Controller
     public function markAsPaid($id)
     {
         $deuda = Debt::findOrFail($id);
-        $deuda->delete(); // O puedes marcarla como pagada de alguna otra manera, por ejemplo, añadiendo un campo 'paid'
+        $deuda->delete();
 
         return redirect()->route('utilities.index')->with('success', 'Deuda marcada como pagada.');
     }

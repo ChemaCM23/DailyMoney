@@ -7,7 +7,6 @@
     <title>Editar Movimiento - DailyMoney</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Estilos específicos para el formulario de edición */
 
         body {
             font-family: Arial;

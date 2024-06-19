@@ -8,7 +8,7 @@
     <title>DailyMoney</title>
 
     <style>
-        /* Estilos de letras */
+        /* Estilo de letra titulo principal*/
         @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
 
         body {
@@ -88,7 +88,6 @@
             }
         }
 
-        /* Estilos de botones */
         .buttons {
             margin-top: 20px;
         }
@@ -135,7 +134,7 @@
 
         .card:hover {
             transform: translateY(-5px);
-            /* Agrega un efecto de elevación al pasar el cursor */
+
         }
 
         .card img {

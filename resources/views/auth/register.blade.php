@@ -52,7 +52,7 @@
             margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
-            gap: 20px; /* Espacio entre los grupos de campos */
+            gap: 20px;
         }
 
         .form-group label {
@@ -71,15 +71,15 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
-            width: 100%; /* Ajuste para que los campos ocupen todo el ancho disponible */
+            width: 100%;
         }
 
         .form-group .third-width {
-            flex: 0 0 calc(33.33% - 10px); /* Ajuste para tres columnas, restando el espacio entre ellos */
+            flex: 0 0 calc(33.33% - 10px);
         }
 
         .form-group .half-width {
-            flex: 0 0 calc(50% - 10px); /* Ajuste para dos columnas, restando el espacio entre ellos */
+            flex: 0 0 calc(50% - 10px);
         }
 
         .inline-flex {
