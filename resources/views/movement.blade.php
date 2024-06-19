@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            background: radial-gradient(#f7e0ff, #3a2e41);
+            background-color: #d2c3dc;
         }
 
         .movement-form-container {

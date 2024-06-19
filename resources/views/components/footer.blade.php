@@ -1,4 +1,4 @@
-<footer style="background-color: #9d2ffe; color: #fff; padding: 20px 0;">
+<footer style="background: radial-gradient(#9d2ffe, #dab3fc); color: #fff; padding: 20px 0;">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
         <!-- Primera columna -->
         <div >

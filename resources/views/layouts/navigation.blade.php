@@ -9,7 +9,7 @@
     <style>
         /* Navbar Styles */
         nav {
-            background-color: #9d2ffe;
+            background: radial-gradient(#9d2ffe, #dab3fc);
             color: #fff;
             display: flex;
             justify-content: space-between;
