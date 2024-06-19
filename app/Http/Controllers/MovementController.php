@@ -73,70 +73,95 @@ class MovementController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        try {
-            $request->validate([
-                'type' => 'required|in:expense,income',
-                'category_id' => 'required|exists:categories,id',
-                'description' => 'nullable|string',
-                'amount' => 'required|numeric|min:0'
-            ]);
+{
+    try {
+        $request->validate([
+            'type' => 'required|in:expense,income',
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0'
+        ]);
 
-            $movement = Movement::findOrFail($id);
-            $movement->type = $request->type;
-            $movement->category_id = $request->category_id;
-            $movement->description = $request->description;
-            $movement->amount = $request->amount;
-            $movement->save();
+        $movement = Movement::findOrFail($id);
+        $user = Auth::user();
 
-            $type = $request->input('type');
-            $amount = $request->input('amount');
-
-            $user = Auth::user();
-
-            if ($type === 'expense') {
-                $user->balance -= $amount;
-            } elseif ($type === 'income') {
-                $user->balance += $amount;
-            }
-
-            $user->save();
-
-            return redirect()->route('movement.index')->with('success', 'Movimiento actualizado correctamente.');
-        } catch (\Exception $e) {
-            dd($e->getMessage()); // Imprime cualquier excepción que ocurra
+        // Ajustar el balance antes de actualizar el movimiento
+        if ($movement->type === 'expense') {
+            $user->balance += $movement->amount; // Revertir el gasto anterior
+        } elseif ($movement->type === 'income') {
+            $user->balance -= $movement->amount; // Revertir el ingreso anterior
         }
-    }
 
-    public function destroy($id)
-    {
-        try {
-            $movement = Movement::findOrFail($id);
-            $movement->delete();
-            return back()->with('success', 'Movimiento eliminado correctamente.');
-        } catch (\Exception $e) {
-            dd($e->getMessage()); // Imprime cualquier excepción que ocurra
+        // Actualizar el movimiento
+        $movement->type = $request->type;
+        $movement->category_id = $request->category_id;
+        $movement->description = $request->description;
+        $movement->amount = $request->amount;
+        $movement->save();
+
+        // Ajustar el balance con el nuevo valor del movimiento
+        if ($request->type === 'expense') {
+            $user->balance -= $request->amount;
+        } elseif ($request->type === 'income') {
+            $user->balance += $request->amount;
         }
+
+        $user->save();
+
+        return redirect()->route('movement.index')->with('success', 'Movimiento actualizado correctamente.');
+    } catch (\Exception $e) {
+        dd($e->getMessage());
     }
+}
 
-    public function generatePdf($movementId)
-    {
 
-        $movement = Movement::findOrFail($movementId)->with('category')->get();
 
-        $html = view('pdf', compact('movement'))->render();
 
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
 
-        $dompdf = new Dompdf($options);
+public function destroy($id)
+{
+    try {
+        $movement = Movement::findOrFail($id);
+        $user = Auth::user();
 
-        $dompdf->loadHtml($html);
+        // Revertir el impacto del movimiento en el balance del usuario
+        if ($movement->type === 'expense') {
+            $user->balance += $movement->amount; // Revertir el gasto
+        } elseif ($movement->type === 'income') {
+            $user->balance -= $movement->amount; // Revertir el ingreso
+        }
 
-        $dompdf->setPaper('A4', 'portrait');
+        $user->save();
 
-        $dompdf->render();
+        $movement->delete();
 
-        return $dompdf->stream("pdf");
+        return back()->with('success', 'Movimiento eliminado correctamente.');
+    } catch (\Exception $e) {
+        dd($e->getMessage());
     }
+}
+
+public function generatePdf()
+{
+    $user = Auth::user();
+
+    // Obtener todos los movimientos del usuario autenticado
+    $movements = Movement::where('user_id', $user->id)->with('category')->get();
+
+    $html = view('pdf', compact('movements'))->render();
+
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+
+    $dompdf = new Dompdf($options);
+
+    $dompdf->loadHtml($html);
+
+    $dompdf->setPaper('A4', 'portrait');
+
+    $dompdf->render();
+
+    return $dompdf->stream("Historial.pdf");
+}
+
 }
