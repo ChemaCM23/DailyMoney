@@ -2,6 +2,10 @@
 
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <style>
+        .fondo {
+            background: white;
+        }
+
         .table-container {
             border-radius: 20px;
             overflow: hidden;
@@ -38,10 +42,10 @@
         }
     </style>
 
-    <div class="flex items-center justify-center mt-5">
+    <div class="fondo flex items-center justify-center mt-5">
         <div class="col-span-12">
             <div class="overflow-auto lg:overflow-visible table-container">
-                <table class="table text-black border-separate space-y-6 text-lg">
+                <table class="table text-white border-separate space-y-6 text-lg">
                     <thead class="fondoTitulo text-white">
                         <tr>
                             <th class="p-5 font-bold text-center">Nombre </th>
