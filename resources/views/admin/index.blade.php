@@ -45,6 +45,7 @@
                     <thead class="fondoTitulo text-white">
                         <tr>
                             <th class="p-5 font-bold text-center">Nombre </th>
+                            <th class="p-5 font-bold text-center">Apellido </th>
                             <th class="p-5 font-bold text-center">Email</th>
                             <th class="p-5 font-bold text-center">Registrado</th>
                             <th class="p-5 font-bold text-center">Admin</th>
@@ -57,6 +58,9 @@
                         <tr class="fondoUser text-white">
                             <td class="p-3 text-center font-bold">
                                 {{ $user->name }}
+                            </td>
+                            <td class="p-3 text-center font-bold">
+                                {{ $user->surname }}
                             </td>
                             <td class="p-3 text-center font-bold">
                                 {{ $user->email }}

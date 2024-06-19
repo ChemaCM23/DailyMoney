@@ -26,11 +26,11 @@
                     <x-input-error class="mt-2" :messages="$errors->get('phone')" />
                 </div>
 
-                <div class="mt-6">
+                {{-- <div class="mt-6">
                     <label for="email" class="block text-sm font-medium  text-white">Email</label>
                     <x-text-input id="email" name="email" type="email" class="mt-1 block w-full rounded-md" :value="old('email', $user->email)" required autocomplete="username" />
                     <x-input-error class="mt-2" :messages="$errors->get('email')" />
-                </div>
+                </div> --}}
             </div>
 
             <div class="flex justify-between mt-6">
